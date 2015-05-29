@@ -14,6 +14,7 @@ public class Game {
 	
 	private Connection con;
 	
+	private Player[] players;
 	
 	
 	public Game(){
@@ -28,8 +29,41 @@ public class Game {
 		
 		//TODO recupreation des la map par la connection
 		String tmp = "";
+		map.decode(tmp);
+		
+		this.initPlayer();
+		
+	}
+	
+	
+	
+	
+	private void initPlayer(){
+		int nbPlayers = 2;
+		
+		players = new Player[nbPlayers];
 		
 		
+		
+		//creation des joueurs
+		for (int i = 0; i < nbPlayers; i++) {
+			System.out.println("Joueur " + (i+1) + " Humain(1) ou IA(2)");
+			
+			int tmp = 1;
+			
+			
+			//TODO gestion d'erreur en cas d'abruti qui rentre n'importe quoi
+			try {
+				tmp = System.in.read();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			if(tmp == 1 )players[i] = new PlayerHuman();
+			else players[i] = new PLayerIA();
+		}
+			
+			
 		
 		
 		
