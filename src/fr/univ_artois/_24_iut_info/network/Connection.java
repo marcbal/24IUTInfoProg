@@ -119,10 +119,22 @@ public class Connection {
 			
 			listener.onOpponentPlay(ligne, colonne, coin);
 		}
-		
+
 
 		else if (code.equals("21")) {
-			listener.onRoundStart();
+			listener.onIllegalPlay();
+		}
+
+		else if (code.equals("22")) {
+			listener.onOpponentPlayIllegal();
+		}
+
+		else if (code.equals("50")) {
+			listener.onPlayerCantPlay();
+		}
+
+		else if (code.equals("88")) {
+			listener.onGameFinish(data);
 		}
 		
 		
