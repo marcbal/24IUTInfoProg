@@ -5,8 +5,8 @@ public class PlayerHuman extends Player {
 	
 
 	
-	public PlayerHuman(int nbTwist, Game game) {
-		super(nbTwist, game);
+	public PlayerHuman(int nbTwist, Game game, int id) {
+		super(nbTwist, game, id);
 	}
 
 	@Override
