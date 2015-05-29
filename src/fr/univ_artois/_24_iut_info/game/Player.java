@@ -12,6 +12,7 @@ public abstract class Player {
 	
 	private Game game;
 	
+	private String couleur;
 	
 	
 	public Player(int nbTwist, Game game){

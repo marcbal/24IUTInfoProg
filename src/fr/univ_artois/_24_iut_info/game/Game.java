@@ -17,8 +17,6 @@ public class Game {
 	
 	private boolean isEnd;
 	
-	private int nbPlayers = 2;
-	
 	private int nbTwist = 10;
 	
 	
@@ -53,13 +51,8 @@ public class Game {
 	
 	private void initPlayer(){
 		
+		this.players = new PlayerHuman[2];
 		
-		this.players = new Player[nbPlayers];
-		
-		
-		
-		//creation des joueurs
-		for (int i = 0; i < nbPlayers; i++) {
 			System.out.println("Joueur " + (i+1) + " Humain(1) ou IA(2)");
 			
 			int tmp = 1;
@@ -74,7 +67,7 @@ public class Game {
 			
 			if(tmp == 1 )players[i] = new PlayerHuman(nbTwist,this);
 			else players[i] = new PLayerIA(nbTwist,this);
-		}	
+			
 		
 	}
 	
@@ -86,20 +79,17 @@ public class Game {
 		
 		while(!isEnd){
 			
-			players[playerTurn].play();
-			
+			players[playerTurn].play();			
 			
 			//TODO calcule des points
 			
-			this.isGameEnd();
-			
+			this.isGameEnd();	
 			
 			
 		}
 		
 		
-		this.onGameEnd();
-		
+		this.onGameEnd();	
 		
 		
 	}
