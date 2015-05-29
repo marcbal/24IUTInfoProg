@@ -27,7 +27,7 @@ public class Connection {
 		addr = a;
 		listener = l;
 		
-		socket.setSoTimeout(30000); // timeout de 30 secondes
+		// socket.setSoTimeout(30000); // timeout de 30 secondes
 		System.out.println("Connexion au serveur à l'adresse "+addr.toString());
 		socket.connect(addr);
 		
