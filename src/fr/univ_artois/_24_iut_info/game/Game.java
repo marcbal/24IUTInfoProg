@@ -30,6 +30,14 @@ public class Game implements ReceiveListener {
 		}
 		
 	}
+	
+	
+	public Game(boolean test, Map map){
+		this.map = map;
+		
+		playerUs = new PlayerIA(nbTwist,this,1);
+		playerEnnemy = new PlayerIA(nbTwist,this,2);
+	}
 
 
 
@@ -115,6 +123,17 @@ public class Game implements ReceiveListener {
 	
 	public Player getEnemy(){
 		return this.playerEnnemy;
+	}
+
+
+	public void setMap(Map map) {
+		this.map = map;
+		
+	}
+	
+	
+	public void playTest(){
+		((PlayerIA)playerUs).playTest();
 	}
 
 }

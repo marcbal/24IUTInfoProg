@@ -11,33 +11,41 @@ public class TestStrategieGame extends AbstractStrategieGame {
 
 	public TestStrategieGame(Game g) {
 		super(g);
-		// TODO Auto-generated constructor stub
 	}
 	
 	
 	private void calculePlayer(Player p, int nbTurn, Map actualMap, ArrayList<InstanceTmpGame> maps, Coordonnee first){
+
 		
 		
 		for(int ligne = 0 ; ligne<actualMap.getLigne()+1 ; ligne ++){
-			for(int colonne =0 ; actualMap.getColonne()+1<0 ; colonne ++){
+			for(int colonne =0 ; colonne<actualMap.getColonne()+1 ; colonne ++){
+
+				
+				Coordonnee coordTmp = first;
 				if(actualMap.canPose(ligne, colonne)){
 					
-					if(first == null)
-						first = new Coordonnee(ligne, colonne);
-				
+					if(coordTmp == null){
+						coordTmp = new Coordonnee(ligne, colonne);
+					}
+					
 					if(nbTurn == 0){
-						actualMap.poser(ligne, colonne, p.getId());
-						maps.add(new InstanceTmpGame(actualMap, first));
+						
+						Map tmp = actualMap.clone();
+						tmp.poser(ligne, colonne, p.getId());
+						maps.add(new InstanceTmpGame(tmp, coordTmp));
+						//System.out.println("test");
 					}
 					else{
+						//System.out.println("test");
 						Map tmp = actualMap.clone();
 						tmp.poser(ligne, colonne, p.getId());
 						
 						if(p instanceof EnemyPlayer){
-							calculePlayer(game.getUs(), nbTurn--, tmp, maps, first);
+							calculePlayer(game.getUs(), nbTurn--, tmp, maps, coordTmp);
 						} 
 						else{
-							calculePlayer(game.getEnemy(), nbTurn--, tmp, maps, first);
+							calculePlayer(game.getEnemy(), nbTurn--, tmp, maps, coordTmp);
 						}
 					}
 				}
@@ -47,36 +55,15 @@ public class TestStrategieGame extends AbstractStrategieGame {
 	}
 		
 		
-	
-
-
-
-
-
-	@Override
-	public Coordonnee playTurn() {
+	public static void main(String[] args) {
+		Map map = new Map();
+		map.decode("5:7:52:18:10:44:51|52:49:24:46:12:41:25|26:28:22:23:13:38:26|43:29:33:41:06:52:50|42:45:48:12:16:51:20|37:06:25:26:26:43:33|5:47:24:5:23:22:18|5:38:38:41:39:17:40|8:19:17:53:29:20:27|35:6:12:28:28:31:17");
+		System.out.println(map);
 		
-		ArrayList<InstanceTmpGame>  maps = new ArrayList<InstanceTmpGame> ();
+		Game game = new Game(true,map);
 		
-		int nbTurn = 4;
-		calculePlayer(game.getUs(),nbTurn,game.getMap(), maps, null);
-		
-		
-		int max = Integer.MIN_VALUE;
-		Coordonnee bestCoup = null;
-		
-		for(int i=0 ; i<maps.size() ; i++){
-			if(maps.get(i).map.getTotalPointOfPlayer(game.getUs().getId() ) -  maps.get(i).map.getTotalPointOfPlayer(game.getEnemy().getId() )>max){
-				bestCoup = maps.get(i).coord;
-				max = maps.get(i).map.getTotalPointOfPlayer(game.getUs().getId() ) -  maps.get(i).map.getTotalPointOfPlayer(game.getEnemy().getId() );
-			}
-		}
-		
-		return bestCoup;
-		
-		
-		
-		
+		game.setMap(map);
+		game.playTest();
 	}
 
 
@@ -85,8 +72,31 @@ public class TestStrategieGame extends AbstractStrategieGame {
 
 	@Override
 	public Coordonnee playTurn() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<InstanceTmpGame>  maps = new ArrayList<InstanceTmpGame> ();
+		
+		int nbTurn = 2;
+		calculePlayer(game.getUs(),nbTurn,game.getMap(), maps, null);
+		
+		
+		int max = Integer.MIN_VALUE;
+		Coordonnee bestCoup = null;
+		
+		for(int i=0 ; i<maps.size() ; i++){
+			//System.out.println("test");
+			//System.out.println(maps.get(i).coord.getX() + "   :   " + maps.get(i).coord.getY() + "point : " + 
+					//(maps.get(i).map.getTotalPointOfPlayer(game.getUs().getId() ) -  maps.get(i).map.getTotalPointOfPlayer(game.getEnemy().getId() )));
+			if(maps.get(i).map.getTotalPointOfPlayer(game.getUs().getId() ) -  maps.get(i).map.getTotalPointOfPlayer(game.getEnemy().getId() )>max){
+				bestCoup = maps.get(i).coord;
+				max = maps.get(i).map.getTotalPointOfPlayer(game.getUs().getId() ) -  maps.get(i).map.getTotalPointOfPlayer(game.getEnemy().getId() );
+				//System.out.println(bestCoup.getX() + "   :   " + bestCoup.getY());
+			}
+		}
+		
+		return bestCoup;
+		
+		
+		
+		
 	}
 
 }

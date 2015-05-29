@@ -5,8 +5,8 @@ import java.util.List;
 
 public class Map implements Cloneable{
 	private List<List<Integer>> map=new ArrayList<List<Integer>>();
-	private byte[][] pion;
-	Map(){
+	private int[][] pion;
+	public Map(){
 		
 	}
 	
@@ -27,7 +27,7 @@ public class Map implements Cloneable{
 			}
 		}
 		
-		pion=new byte[map.size()+1][map.get(0).size()+1];
+		pion=new int[map.size()+1][map.get(0).size()+1];
 		for(int i=0;i<this.pion.length;i++){
 			for(int j=0;j<this.pion[0].length;j++){
 				pion[i][j]=0;
@@ -67,13 +67,13 @@ public class Map implements Cloneable{
 	 * @param id id du joueur
 	 */
 	public void poser(int ligne,int colonne,int id){
-		pion[ligne][colonne]=(byte)id;
+		pion[ligne][colonne] = id;
 	}
 	
 	public int nbPion(){
 		int value=0;
-		for(byte[] ligne:this.pion){
-			for(byte b:ligne){
+		for(int[] ligne:this.pion){
+			for(int b:ligne){
 				value+=b;
 			}
 		}
@@ -98,6 +98,8 @@ public class Map implements Cloneable{
 	
 	public int whoIsTheCase(int ligne,int colonne){
 		int value=0;
+		
+		//System.out.println("valeur pion : " + ligne + " : " + colonne  + " : "+ pion[ligne][colonne]);
 		if(pion[ligne][colonne]==1){
 			value-=1;
 		}else if(pion[ligne][colonne]==2){
@@ -124,7 +126,8 @@ public class Map implements Cloneable{
 			value+=1;
 		}
 		
-		return value==0?0:(value<0?1:2);
+		//System.out.println("value : " + value);
+		return (value==0)?0:value<0?1:2;
 	}
 	
 	public int getTotalPointOfPlayer(int id){
@@ -132,10 +135,12 @@ public class Map implements Cloneable{
 		for(int i=0;i<map.size();i++){
 			for(int j=0;j<map.get(0).size();j++){
 				if(this.whoIsTheCase(i,j)==id){
+					//System.out.println("je suis a : " + this.whoIsTheCase(i,j));
 					totalPoint+=getPoint(i,j);
 				}
 			}
 		}
+		//System.out.println(("total point : " + totalPoint));
 		return totalPoint;
 	}
 	
@@ -167,15 +172,12 @@ public class Map implements Cloneable{
 	public Map clone(){
 		Map m = new Map();
 	    
-		m.map=new ArrayList<List<Integer>>();
-		for(List<Integer> i:this.map){
-			m.map.add(new ArrayList<Integer>(i));
+		m.map=this.map;
 		
-		}
-		
-		m.pion=new byte[map.size()+1][map.get(0).size()+1];
+		m.pion=new int[map.size()+1][map.get(0).size()+1];
 		for(int i=0;i<m.pion.length;i++){
 			for(int j=0;j<m.pion[0].length;j++){
+				//System.out.println("Clone : x:" + i + " : y:" + j + " " + this.pion[i][j]);
 				m.pion[i][j]=this.pion[i][j];
 			}
 		}
