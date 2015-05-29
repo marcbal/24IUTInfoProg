@@ -42,15 +42,18 @@ public class TurnPossibility {
 
 		return (score(mapAfter,joueur) - score(map,joueur))+(score(map,enemy) - score(mapAfter,enemy)) ;
 	}
+	
 	public int getEnemyCapturedPoint(){
 		if(!this.mapAfter.canPose(x,y))
 			return 0;
 
 		return (score(mapAfter,enemy) - score(map,enemy))+(score(map,joueur) - score(mapAfter,joueur)) ;
 	}
+	
 	public int getLockedPoint(){
 		return 0;
 	}
+	
 	public int getEnemyLockedPoint(){
 		return 0;
 	}
