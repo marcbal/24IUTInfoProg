@@ -8,12 +8,14 @@ public abstract class Player {
 	
 	protected int id;
 	
-	private int nbTwist;
+	protected int nbTwist;
 	
-	private Game game;
+	protected Game game;
+	
+	private String couleur;
 	
 	
-	
+	@SuppressWarnings("static-access")
 	public Player(int nbTwist, Game game){
 		this.id = this.ID_COUNT;
 		this.ID_COUNT ++ ;
@@ -24,7 +26,17 @@ public abstract class Player {
 	}
 	
 	
-	private void sendTurn(int x, int y){
+	protected void sendTurn(int x, int y){
+		
+		if(game.getMap().canPose(x, y)){
+			game.getMap().poser(x, y, this.id);
+			//game.getConnection().send(); //TODO
+		}
+		else{
+			//gestion erreur
+		}
+		
+		this.nbTwist--;
 		
 	}
 	
@@ -32,6 +44,28 @@ public abstract class Player {
 		return this.nbTwist;
 	}
 	
+
+	public String getCouleur(){
+		return this.couleur;
+	}
+	
 	public abstract void play();
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

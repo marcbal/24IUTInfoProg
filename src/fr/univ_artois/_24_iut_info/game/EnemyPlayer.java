@@ -1,8 +1,8 @@
 package fr.univ_artois._24_iut_info.game;
 
-public class PLayerIA extends Player {
+public class EnemyPlayer extends Player {
 
-	public PLayerIA(int nbTwist, Game game) {
+	public EnemyPlayer(int nbTwist, Game game) {
 		super(nbTwist, game);
 		// TODO Auto-generated constructor stub
 	}
@@ -10,7 +10,7 @@ public class PLayerIA extends Player {
 	@Override
 	public void play() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
