@@ -1,6 +1,7 @@
 package fr.univ_artois._24_iut_info.game;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Map implements Cloneable{
@@ -12,7 +13,8 @@ public class Map implements Cloneable{
 	
 	
 	public void decode(String str){
-		String[] lignes=str.split("|");
+		String[] lignes=str.split("\\|");
+		
 		for(String ligne : lignes){
 			if(ligne.isEmpty()){
 				continue;
