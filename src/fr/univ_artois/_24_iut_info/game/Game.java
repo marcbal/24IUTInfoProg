@@ -76,8 +76,9 @@ public class Game implements ReceiveListener {
 
 	@Override
 	public void onRoundStart() {
-		System.out.println("c'est à nous de jouer");
-		
+		System.out.println("-----> C'est à nous de jouer <-----");
+
+		System.out.println(map);
 		playerUs.play();
 	}
 
@@ -103,6 +104,7 @@ public class Game implements ReceiveListener {
 	@Override
 	public void onGameFinish(String serverMessage) {
 		System.out.println(serverMessage);
+		System.err.println(map);
 	}
 	
 	
