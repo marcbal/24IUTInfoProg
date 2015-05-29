@@ -79,4 +79,14 @@ public class TestStrategieGame extends AbstractStrategieGame {
 		
 	}
 
+
+
+
+
+	@Override
+	public Coordonnee playTurn() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
