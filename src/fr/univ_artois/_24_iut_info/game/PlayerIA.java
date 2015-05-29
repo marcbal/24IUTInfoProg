@@ -2,21 +2,20 @@ package fr.univ_artois._24_iut_info.game;
 
 import fr.univ_artois._24_iut_info.ia.AbstractStrategieGame;
 import fr.univ_artois._24_iut_info.ia.Coordonnee;
-import fr.univ_artois._24_iut_info.ia.StrategieBasicGame;
+import fr.univ_artois._24_iut_info.ia.TestStrategieGame;
 
 public class PlayerIA extends Player {
 
 	public PlayerIA(int nbTwist, Game game, int id) {
 		super(nbTwist, game, id);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void play() {
-		// TODO Auto-generated method stub
-		StrategieBasicGame st = new StrategieBasicGame(game);
+		AbstractStrategieGame st = new TestStrategieGame(game);
 		Coordonnee playCoordonnee = st.playTurn();
-		trySendTurn(playCoordonnee.getX(), playCoordonnee.getY());
+		if (!trySendTurn(playCoordonnee.getX(), playCoordonnee.getY()))
+			System.err.println("L'IA n'a pas pu envoyer son résultat au serveur car la classe Game l'a reffusée");
 	}
 	
 	

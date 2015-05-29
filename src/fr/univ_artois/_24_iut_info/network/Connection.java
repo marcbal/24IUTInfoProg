@@ -140,10 +140,12 @@ public class Connection {
 
 		else if (code.equals("88")) {
 			listener.onGameFinish(data);
+			System.exit(0);
 		}
 
 		else if (code.equals("91")) {
-			System.err.println("Demande non valide");
+			System.err.println("Demande non valide : veuillez relancer le serveur");
+			System.exit(0);
 		}
 		
 		
