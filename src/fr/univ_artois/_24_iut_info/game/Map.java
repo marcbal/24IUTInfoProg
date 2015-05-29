@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Map {
 	private List<List<Integer>> map=new ArrayList<List<Integer>>();
-	private Byte[][] pion;
+	private byte[][] pion;
 	Map(String str){
 		decode(str);
 	}
@@ -21,7 +21,22 @@ public class Map {
 			}
 		}
 		
-		pion=new Byte[map.size()+1][map.get(0).size()+1];
+		pion=new byte[map.size()+1][map.get(0).size()+1];
+		for(byte[] ligne:pion){
+			for(byte p:ligne){
+				p=(byte)0;
+			}
+		}
 		
 	}
+	public void poser(int x,int y, int id){
+		pion[x][y]=(byte)id;
+	}
+	
+	public boolean canPose(int x,int y){
+		return pion[x][y]==0;
+	}
+	
+	
+	
 }
