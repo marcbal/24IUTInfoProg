@@ -74,8 +74,8 @@ public class TestStrategieGame extends AbstractStrategieGame {
 	public Coordonnee playTurn() {
 		ArrayList<InstanceTmpGame>  maps = new ArrayList<InstanceTmpGame> ();
 		int nbTurn = 2;
-		if(game.getMap().nbTrou()<2){
-			nbTurn = game.getMap().nbTrou();
+		if(game.getMap().nbTroue()<2){
+			nbTurn = game.getMap().nbTroue()-1;
 		}
 		
 		
