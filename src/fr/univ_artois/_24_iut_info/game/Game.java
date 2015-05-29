@@ -133,11 +133,7 @@ public class Game implements ReceiveListener {
 	
 	
 	public void playTest(){
-<<<<<<< HEAD
-		for (int i = 0; i < 52555; i++) {
-=======
 		for (int i = 0; i < 987; i++) {
->>>>>>> branch 'master' of https://github.com/marcbal/24IUTInfoProg.git
 			((PlayerIA)playerUs).playTest();
 			System.out.println(map);
 			((PlayerIA)playerEnnemy).playTest();
