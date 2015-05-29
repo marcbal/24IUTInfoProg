@@ -20,7 +20,7 @@ public class PlayerHuman extends Player {
 			boolean ok = false;
 			
 			do {
-				String in = keyboard.nextLine();
+				String in = keyboard.nextLine().trim();
 				String[] coordsStr = in.split(" ");
 				ok = trySendTurn(Integer.parseInt(coordsStr[0]), Integer.parseInt(coordsStr[1]));
 				if (!ok)
@@ -29,6 +29,7 @@ public class PlayerHuman extends Player {
 			
 		} catch(Exception e) {
 			System.err.println("Erreur de saisie, on envoie 0 0 au serveur");
+			e.printStackTrace();
 			trySendTurn(0, 0);
 		}
 		

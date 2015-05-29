@@ -27,6 +27,7 @@ public class Connection {
 		addr = a;
 		listener = l;
 		
+		socket.setSoTimeout(10000); // timeout de 10 secondes
 		socket.connect(addr);
 		
 		receiverThread = new Thread(() -> {
@@ -139,6 +140,10 @@ public class Connection {
 
 		else if (code.equals("88")) {
 			listener.onGameFinish(data);
+		}
+
+		else if (code.equals("91")) {
+			System.err.println("Demande non valide");
 		}
 		
 		
