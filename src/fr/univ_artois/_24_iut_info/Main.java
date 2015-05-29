@@ -5,7 +5,7 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		new Game();
+		new Game("1.1.1.1", 62);
 	}
 
 }
