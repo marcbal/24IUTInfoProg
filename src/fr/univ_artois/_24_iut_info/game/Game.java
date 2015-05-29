@@ -131,7 +131,13 @@ public class Game implements ReceiveListener {
 	
 	
 	public void playTest(){
-		((PlayerIA)playerUs).playTest();
+		for (int i = 0; i < 10; i++) {
+			((PlayerIA)playerUs).playTest();
+			((PlayerIA)playerEnnemy).playTest();
+		}
+		
+		
+		
 	}
 
 }

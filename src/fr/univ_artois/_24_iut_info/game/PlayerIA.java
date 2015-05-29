@@ -22,6 +22,8 @@ public class PlayerIA extends Player {
 	
 	public void playTest(){
 		Coordonnee playCoordonnee = st.playTurn();
+		game.getMap().poser(playCoordonnee.getX(), playCoordonnee.getY(), id);
+		
 		System.out.println(playCoordonnee.getX() + "   :   " + playCoordonnee.getY());
 	}
 	
