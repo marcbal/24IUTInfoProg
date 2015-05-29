@@ -3,6 +3,7 @@ package fr.univ_artois._24_iut_info.game;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 
+import fr.univ_artois._24_iut_info.Main;
 import fr.univ_artois._24_iut_info.network.Connection;
 import fr.univ_artois._24_iut_info.network.ReceiveListener;
 
@@ -17,16 +18,14 @@ public class Game implements ReceiveListener {
 	private Player[] players;
 	
 	private int nbTwist = 10;
-	
-	private String nomEquipe = "";
+	private String nomEquipe = "Les mounny python";
 	
 	private int playerTurn = 0;
 	
 	
-	
-	public Game(String addr, int port){
+	public Game(){
 		try {
-			con = new Connection(new InetSocketAddress(addr,port),this.nomEquipe ,this);
+			con = new Connection(new InetSocketAddress(Main.SERVER_HOST,Main.SERVER_PORT),Main.NOM_EQUIPE ,this);
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.exit(0);
@@ -40,27 +39,19 @@ public class Game implements ReceiveListener {
 	@Override
 	public void onPlayerSet(int playerId) {
 		
-		this.players = new PlayerHuman[2];
+		this.players = new Player[2];
 		
-		int tmp = 1;
+		Player playerTmp = (Main.HUMAIN) ?
+				new PlayerHuman(nbTwist,this) :
+				new PLayerIA(nbTwist,this);
 		
-		Player playerTmp;
-		//TODO gestion d'erreur en cas d'abruti qui rentre n'importe quoi
-		try {
-			tmp = System.in.read();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		if(tmp == 1 )playerTmp = new PlayerHuman(nbTwist,this);
-		else playerTmp = new PLayerIA(nbTwist,this);
 		
 		
 		if(playerId == 1){			
 			players[0] = playerTmp;			
 			players[1] = new EnemyPlayer(nbTwist, this);
 		}
-		else{			
+		else{
 			players[1] = playerTmp;			
 			players[0] = new EnemyPlayer(nbTwist, this);
 		}

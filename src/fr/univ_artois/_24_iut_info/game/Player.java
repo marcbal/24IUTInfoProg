@@ -6,15 +6,16 @@ public abstract class Player {
 
 	private static int ID_COUNT = 1;
 	
-	private int id;
+	protected int id;
 	
-	private int nbTwist;
+	protected int nbTwist;
 	
-	private Game game;
+	protected Game game;
 	
 	private String couleur;
 	
 	
+	@SuppressWarnings("static-access")
 	public Player(int nbTwist, Game game){
 		this.id = this.ID_COUNT;
 		this.ID_COUNT ++ ;
@@ -25,7 +26,7 @@ public abstract class Player {
 	}
 	
 	
-	private void sendTurn(int x, int y){
+	protected void sendTurn(int x, int y){
 		
 		if(game.getMap().canPose(x, y)){
 			game.getMap().poser(x, y, this.id);
