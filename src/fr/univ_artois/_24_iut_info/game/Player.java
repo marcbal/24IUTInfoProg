@@ -1,5 +1,7 @@
 package fr.univ_artois._24_iut_info.game;
 
+import java.io.IOException;
+
 public abstract class Player {
 	
 	protected int id;
@@ -18,18 +20,39 @@ public abstract class Player {
 	}
 	
 	
-	protected void sendTurn(int x, int y){
+	protected boolean trySendTurn(int ligne, int colonne){
 		
-		if(game.getMap().canPose(x, y)){
-			game.getMap().poser(x, y, this.id);
-			//game.getConnection().send(); //TODO
+		if(!game.getMap().canPose(ligne, colonne))
+			return false;
+		
+		
+		game.getMap().poser(ligne, colonne, this.id);
+		
+		int width = game.getMap().getColonne();
+		int height = game.getMap().getLigne();
+		
+		boolean haut = (ligne < height);
+		boolean gauche = (colonne < width);
+		
+		int coin = (haut && gauche) ? 1 :
+			(haut && !gauche) ? 2 :
+				(!haut && !gauche) ? 3 : 4;
+		
+		if (!haut)
+			ligne--;
+		if (!gauche)
+			colonne--;
+			
+		try {
+			if (!(this instanceof EnemyPlayer))
+				game.getConnection().sendTwistLock(ligne+1, (char) ('A'+colonne), coin);
+			this.nbTwist--;
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-		else{
-			//gestion erreur
-		}
 		
-		this.nbTwist--;
 		
+		return true;
 	}
 	
 	public int getNbTwist(){

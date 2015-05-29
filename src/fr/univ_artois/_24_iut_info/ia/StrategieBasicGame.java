@@ -15,7 +15,7 @@ public class StrategieBasicGame extends AbstractStrategieGame {
 	public StrategieBasicGame(Game game) {
 		super(game);
 	}
-
+	
 	
 	public TurnPossibility getMaxTwistValues() {
 		TurnPossibility turnMaxPointCaptured = nextTurnPossibilities.get(0).get(0);
@@ -28,7 +28,7 @@ public class StrategieBasicGame extends AbstractStrategieGame {
 		return turnMaxPointCaptured;
 	}
 
-	public void playTurn()
+	public Coordonnee playTurn()
 	{
 		int ligne; 
 		int colonne;
@@ -38,6 +38,8 @@ public class StrategieBasicGame extends AbstractStrategieGame {
 		if(nbPions == 0)
 		{
 			// jouer les tour 1
+			TurnPossibility tr = getMaxTwistValues();
+			return new Coordonnee(tr.getX(), tr.getY());
 			
 		}
 		
