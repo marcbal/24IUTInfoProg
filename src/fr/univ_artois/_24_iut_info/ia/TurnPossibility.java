@@ -31,7 +31,19 @@ public class TurnPossibility {
 				int x2 = x-1+i;
 				int y2 = y-1+j;
 				if(x2>=0&&y2>=0)
-					score += map.getPoint(x,y);
+					score += m.getPoint(x2,y2);
+		}
+		return score;
+	}
+	
+	private int scoreLocked(Map m,byte player){
+		int score = 0;
+		for(int i=0;i<2;i++)
+			for(int j=0;j<2;j++){
+				int x2 = x-1+i;
+				int y2 = y-1+j;
+				if(x2>=0&&y2>=0 && m.isLocked(x2,y2,player))
+					score += m.getPoint(x2,y2);
 		}
 		return score;
 	}
@@ -51,11 +63,17 @@ public class TurnPossibility {
 	}
 	
 	public int getLockedPoint(){
-		return 0;
+		if(!this.mapAfter.canPose(x,y))
+			return 0;
+
+		return (scoreLocked(mapAfter,joueur) - scoreLocked(map,joueur)) ;
 	}
 	
 	public int getEnemyLockedPoint(){
-		return 0;
+		if(!this.mapAfter.canPose(x,y))
+			return 0;
+
+		return (scoreLocked(mapAfter,enemy) - scoreLocked(map,enemy)) ;
 	}
 	
 	public int getX() {

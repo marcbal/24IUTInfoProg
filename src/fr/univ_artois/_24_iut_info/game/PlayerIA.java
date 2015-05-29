@@ -4,9 +4,9 @@ import fr.univ_artois._24_iut_info.ia.AbstractStrategieGame;
 import fr.univ_artois._24_iut_info.ia.Coordonnee;
 import fr.univ_artois._24_iut_info.ia.StrategieBasicGame;
 
-public class PLayerIA extends Player {
+public class PlayerIA extends Player {
 
-	public PLayerIA(int nbTwist, Game game, int id) {
+	public PlayerIA(int nbTwist, Game game, int id) {
 		super(nbTwist, game, id);
 		// TODO Auto-generated constructor stub
 	}
