@@ -70,7 +70,7 @@ public class Game implements ReceiveListener {
 
 	@Override
 	public void onRoundStart() {
-		System.out.println("c'est au joueur " + playerUs.getCouleur() + " de jouer");
+		System.out.println("c'est à nous de jouer");
 		
 		playerUs.play();
 	}

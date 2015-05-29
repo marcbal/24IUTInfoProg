@@ -88,7 +88,11 @@ public class Map implements Cloneable{
 		return map.get(ligne).get(colonne);
 	}
 	public boolean canPose(int ligne,int colonne){
-		return pion[ligne][colonne]==0;
+		try {
+			return pion[ligne][colonne]==0;
+		} catch(ArrayIndexOutOfBoundsException e) {
+			return false;
+		}
 	}
 	public int whoIsTheCase(int ligne,int colonne){
 		int value=0;
