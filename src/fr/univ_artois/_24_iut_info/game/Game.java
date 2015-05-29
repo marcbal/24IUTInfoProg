@@ -22,6 +22,7 @@ public class Game {
 			con = new Connection(new InetSocketAddress(addr));
 		} catch (IOException e) {
 			e.printStackTrace();
+			System.exit(0);
 		}
 		
 		
