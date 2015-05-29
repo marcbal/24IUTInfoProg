@@ -50,6 +50,11 @@ public abstract class Player {
 	}
 	
 	public abstract void play();
+
+
+	public int getId() {
+		return this.id;
+	}
 	
 	
 	

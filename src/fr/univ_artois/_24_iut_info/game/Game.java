@@ -23,7 +23,6 @@ public class Game implements ReceiveListener {
 	private int playerTurn = 0;
 	
 	
-	
 	public Game(){
 		try {
 			con = new Connection(new InetSocketAddress(InetAddress.getByName(Main.SERVER_HOST),Main.SERVER_PORT),Main.NOM_EQUIPE ,this);
@@ -71,8 +70,9 @@ public class Game implements ReceiveListener {
 
 	@Override
 	public void onOpponentPlay(int ligne, char colonne, int coin) {
-		//map.poser(x, y, id); //TODO
-		
+		map.poser(ligne, colonne, coin, players[playerTurn].getId());
+		playerTurn++;
+		playerTurn%=2;
 	}
 
 
@@ -100,15 +100,16 @@ public class Game implements ReceiveListener {
 
 	@Override
 	public void onOpponentPlayIllegal() {
-
 		System.err.println("le serveur indique que l'enemy a jouer un coup illegal");
+		playerTurn++;
+		playerTurn%=2;
 		
 	}
 
 
 	@Override
 	public void onPlayerCantPlay() {
-		// TODO Auto-generated method stub
+		System.err.println("ce n'est plus votre tour de jouer");
 		
 	}
 
@@ -118,9 +119,6 @@ public class Game implements ReceiveListener {
 		System.out.println(serverMessage);
 		
 	}
-	
-
-	
 	
 	public Map getMap(){
 		return this.map;
