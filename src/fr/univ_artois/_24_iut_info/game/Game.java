@@ -71,8 +71,7 @@ public class Game implements ReceiveListener {
 	@Override
 	public void onOpponentPlay(int ligne, char colonne, int coin) {
 		map.poser(ligne, colonne, coin, players[playerTurn].getId());
-		playerTurn++;
-		playerTurn%=2;
+		endTurn();
 	}
 
 
@@ -80,12 +79,12 @@ public class Game implements ReceiveListener {
 
 	@Override
 	public void onRoundStart() {
-		playerTurn++;
-		playerTurn%=2;
 		
 		System.out.println("c'est au joueur " + players[playerTurn].getCouleur() + " de jouer");
 		
 		players[playerTurn].play();
+		
+		endTurn();
 		
 		
 	}
@@ -101,8 +100,7 @@ public class Game implements ReceiveListener {
 	@Override
 	public void onOpponentPlayIllegal() {
 		System.err.println("le serveur indique que l'enemy a jouer un coup illegal");
-		playerTurn++;
-		playerTurn%=2;
+		endTurn();
 		
 	}
 
@@ -119,6 +117,16 @@ public class Game implements ReceiveListener {
 		System.out.println(serverMessage);
 		
 	}
+	
+	
+	private void endTurn(){
+		System.out.println("joueur suivant");
+		System.out.println(map.toString());
+		playerTurn++;
+		playerTurn%=2;
+		
+	}
+	
 	
 	public Map getMap(){
 		return this.map;
