@@ -24,7 +24,7 @@ public class Game implements ReceiveListener {
 	
 	public Game(){
 		try {
-			con = new Connection(new InetSocketAddress(InetAddress.getByName(Main.SERVER_HOST),Main.SERVER_PORT),Main.NOM_EQUIPE ,this);
+			con = new Connection(new InetSocketAddress(InetAddress.getByName(Main.SERVER_HOST), Main.SERVER_PORT), Main.NOM_EQUIPE, this);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
