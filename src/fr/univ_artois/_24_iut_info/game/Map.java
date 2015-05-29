@@ -75,7 +75,14 @@ public class Map implements Cloneable{
 		}
 		return value;
 	}
-	
+	public int getPoint(int ligne,char colonne){
+		colonne=Character.toUpperCase(colonne);
+		int col=colonne-'A';
+		return getPoint(ligne,col);
+	}
+	public int getPoint(int ligne,int colonne){
+		return map.get(ligne).get(colonne);
+	}
 	public boolean canPose(int x,int y){
 		return pion[x][y]==0;
 	}
