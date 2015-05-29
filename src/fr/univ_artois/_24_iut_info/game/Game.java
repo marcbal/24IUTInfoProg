@@ -97,6 +97,7 @@ public class Game implements ReceiveListener {
 		System.out.println(serverMessage);
 	}
 	
+	
 	public Map getMap(){
 		return this.map;
 	}
