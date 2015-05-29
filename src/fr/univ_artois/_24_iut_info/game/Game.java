@@ -18,10 +18,9 @@ public class Game implements ReceiveListener {
 	
 	private int nbTwist = 10;
 	
-	private String nomEquipe = "";
+	private String nomEquipe = "Les mounny python";
 	
 	private int playerTurn = 0;
-	
 	
 	
 	public Game(String addr, int port){

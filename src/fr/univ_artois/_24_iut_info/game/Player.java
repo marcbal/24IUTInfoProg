@@ -25,7 +25,7 @@ public abstract class Player {
 	}
 	
 	
-	private void sendTurn(int x, int y){
+	protected void sendTurn(int x, int y){
 		
 		if(game.getMap().canPose(x, y)){
 			game.getMap().poser(x, y, this.id);
