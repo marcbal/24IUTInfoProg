@@ -14,7 +14,6 @@ public class PlayerIA extends Player {
 
 	@Override
 	public void play() {
-		// TODO Auto-generated method stub
 		Coordonnee playCoordonnee = st.playTurn();
 		if (!trySendTurn(playCoordonnee.getX(), playCoordonnee.getY()))
 			System.err.println("L'IA n'a pas pu envoyer son résultat au serveur car l'état actuel du jeu ne le permet pas");

@@ -10,9 +10,7 @@ public abstract class AbstractStrategieGame {
 	protected Game game;
 	protected List<List<TurnPossibility>> nextTurnPossibilities;
 	
-
 	
-
 	public AbstractStrategieGame(Game game){
 		this.game =  game;
 	}

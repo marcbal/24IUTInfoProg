@@ -194,20 +194,44 @@ public class Map implements Cloneable{
 	
 	@Override
 	public String toString(){
-		StringBuffer buffer = new StringBuffer();
 		
+		String out = "";
 		
-		
-		for(List<Integer> ligne:map){
-			buffer.append("---------------------------\n");
-			
-			for(int value:ligne){
-				buffer.append("|"+value);
+		for (int i = 0; i< map.size(); i++)
+		{
+			// ligne de pion au dessus des cases de la ligne courante :
+			boolean premier = true;
+			for (int c : pion[i]) { // 179 │  196 ─
+				if (!premier)
+					out += "──";
+				premier = false;
+				out += (c == 0) ? " " : c;
 			}
-			buffer.append("|\n");
+			out += "\n";
+
+			premier = true;
+			for (int p : map.get(i)) {
+				if (premier)
+					out += "|";
+				premier = false;
+				
+				String nbAff = (p<10) ? " "+p : ""+p;
+				
+				out += nbAff+"|";
+			}
+			out += "\n";
+			
 		}
 		
-		return buffer.toString();
+		boolean premier = true;
+		for (int c : pion[pion.length-1]) { // 179 │  196 ─
+			if (!premier)
+				out += "──";
+			premier = false;
+			out += (c == 0) ? " " : c;
+		}
+		
+		return out;
 	}
 		
 		
