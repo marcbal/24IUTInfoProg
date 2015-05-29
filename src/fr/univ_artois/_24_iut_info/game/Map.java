@@ -162,4 +162,29 @@ public class Map implements Cloneable{
 	    return m;
 	}
 	
+	
+	@Override
+	public String toString(){
+		StringBuffer buffer = new StringBuffer();
+		
+		
+		
+		for(List<Integer> ligne:map){
+			buffer.append("---------------------------\n");
+			
+			for(int value:ligne){
+				buffer.append("|"+value);
+			}
+			buffer.append("|\n");
+		}
+		
+		return buffer.toString();
+		
+		
+		
+		
+		
+
+	}
+	
 }

@@ -54,6 +54,7 @@ public class Game implements ReceiveListener {
 	public void onGameStart(String mapStr) {
 		map = new Map();
 		map.decode(mapStr);		
+		System.out.println(map.toString());
 	}
 
 
