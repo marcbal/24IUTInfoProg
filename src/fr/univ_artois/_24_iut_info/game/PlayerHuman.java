@@ -9,7 +9,8 @@ public class PlayerHuman extends Player {
 	
 	@Override
 	public void play() {
-		System.out.println("");
+		System.out.println("10-A vous de jouer ("+this.id+")");
+		
 
 	}
 
