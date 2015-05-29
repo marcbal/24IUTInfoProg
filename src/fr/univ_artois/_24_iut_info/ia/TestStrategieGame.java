@@ -55,7 +55,7 @@ public class TestStrategieGame extends AbstractStrategieGame {
 		
 	public static void main(String[] args) {
 		Map map = new Map();
-		map.decode("5:7:52:18:10:44:51:51:51:51|" + 
+		/*map.decode("5:7:52:18:10:44:51:51:51:51|" + 
 				"5:7:52:18:10:44:51:51:51:51|" + 
 				"5:7:52:18:10:44:51:51:51:51|" + 
 				"5:7:52:18:10:44:51:51:51:51|" + 
@@ -64,8 +64,8 @@ public class TestStrategieGame extends AbstractStrategieGame {
 				"5:7:52:18:10:44:51:51:51:51|" + 
 				"5:7:52:18:10:44:51:51:51:51|" + 
 				"5:7:52:18:10:44:51:51:51:51|" + 
-				"5:7:52:18:10:44:51:51:51:51|" );
-		//map.decode("5:7:52|52:49:24|26:28:22");
+				"5:7:52:18:10:44:51:51:51:51|" );*/
+		map.decode("5:7:52|52:49:24|26:28:22");
 		System.out.println(map);
 		
 		Game game = new Game(true,map);
@@ -81,8 +81,8 @@ public class TestStrategieGame extends AbstractStrategieGame {
 	public Coordonnee playTurn() {
 		ArrayList<InstanceTmpGame>  maps = new ArrayList<InstanceTmpGame> ();
 		int nbTurn = 2;
-		if(game.getMap().nbTroue()<2){
-			nbTurn = game.getMap().nbTroue()-1;
+		if(game.getMap().nbTroue()<3){
+			nbTurn =0;
 		}
 		
 		

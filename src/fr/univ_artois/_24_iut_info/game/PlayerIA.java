@@ -15,6 +15,7 @@ public class PlayerIA extends Player {
 	@Override
 	public void play() {
 		Coordonnee playCoordonnee = st.playTurn();
+		if(playCoordonnee == null) playCoordonnee = new Coordonnee(0, 0);
 		if (!trySendTurn(playCoordonnee.getX(), playCoordonnee.getY()))
 			System.err.println("L'IA n'a pas pu envoyer son résultat au serveur car l'état actuel du jeu ne le permet pas");
 	}
@@ -22,6 +23,7 @@ public class PlayerIA extends Player {
 	
 	public void playTest(){
 		Coordonnee playCoordonnee = st.playTurn();
+		
 		game.getMap().poser(playCoordonnee.getX(), playCoordonnee.getY(), id);
 		
 		System.out.println(playCoordonnee.getX() + "   :   " + playCoordonnee.getY());
