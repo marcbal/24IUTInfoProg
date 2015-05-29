@@ -25,7 +25,12 @@ public class StrategieBasicGame extends AbstractStrategieGame {
 		}
 		return turnMaxPointCaptured;
 	}
-
+	
+	
+	
+	private static int max(ArrayList<>)
+	
+	
 	public Coordonnee playTurn()
 	{
 		int ligne; 
@@ -43,6 +48,16 @@ public class StrategieBasicGame extends AbstractStrategieGame {
 		
 		else
 		{ 
+			List<int[]> pointsPotentielsIA =new ArrayList<int[]>(); // getList(3,1)
+
+			if(!pointsPotentielsIA.isEmpty()) {
+				
+			}
+			else {
+				//point
+				
+			}
+			/*
 			// Tour x
 			class MaListe
 			{ 
@@ -62,7 +77,7 @@ public class StrategieBasicGame extends AbstractStrategieGame {
 			List<MaListe> pointsPotentielsContre =new ArrayList<MaListe>();
 			List<MaListe> pointsPotentielsIA =new ArrayList<MaListe>();
 
-			
+			/*
 			for(int i = 0; i < game.getMap().getLigne(); i++)
 			{
 				for(int j = 0; j < game.getMap().getColonne(); j++)
@@ -73,7 +88,8 @@ public class StrategieBasicGame extends AbstractStrategieGame {
 					}
 				}
 			}
-			
+			*/
+			/*
 			for(int i = 0; i < game.getMap().getLigne(); i++)
 			{
 				for(int j = 0; j < game.getMap().getColonne(); j++)
@@ -84,7 +100,7 @@ public class StrategieBasicGame extends AbstractStrategieGame {
 					}
 				}
 			}
-			
+			*/
 			// si on ne peut rien lock
 			if( !(pointsPotentielsContre.get(0) instanceof MaListe))
 			{
