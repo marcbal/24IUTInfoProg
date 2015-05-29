@@ -15,7 +15,7 @@ public class PlayerIA extends Player {
 		AbstractStrategieGame st = new TestStrategieGame(game);
 		Coordonnee playCoordonnee = st.playTurn();
 		if (!trySendTurn(playCoordonnee.getX(), playCoordonnee.getY()))
-			System.err.println("L'IA n'a pas pu envoyer son résultat au serveur car la classe Game l'a reffusée");
+			System.err.println("L'IA n'a pas pu envoyer son résultat au serveur car l'état actuel du jeu ne le permet pas");
 	}
 	
 	

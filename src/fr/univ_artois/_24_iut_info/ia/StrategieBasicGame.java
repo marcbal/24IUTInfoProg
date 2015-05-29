@@ -2,8 +2,8 @@ package fr.univ_artois._24_iut_info.ia;
 
 
 import java.util.List;
-
 import java.util.ArrayList;
+
 
 
 import fr.univ_artois._24_iut_info.game.Game;
@@ -28,9 +28,8 @@ public class StrategieBasicGame extends AbstractStrategieGame {
 	
 	
 	
-	private static int max(ArrayList<>)
 	
-	
+	@SuppressWarnings("unused")
 	public Coordonnee playTurn()
 	{
 		int ligne; 
@@ -102,7 +101,7 @@ public class StrategieBasicGame extends AbstractStrategieGame {
 			}
 			*/
 			// si on ne peut rien lock
-			if( !(pointsPotentielsContre.get(0) instanceof MaListe))
+			//if( !(pointsPotentielsContre.get(0) instanceof MaListe))
 			{
 				// si on a un (ou +) 2-1, on securise le meilleur
 				
