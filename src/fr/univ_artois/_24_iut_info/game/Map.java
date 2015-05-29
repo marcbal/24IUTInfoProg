@@ -1,7 +1,6 @@
 package fr.univ_artois._24_iut_info.game;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Map implements Cloneable{
@@ -87,34 +86,34 @@ public class Map implements Cloneable{
 	public int getPoint(int ligne,int colonne){
 		return map.get(ligne).get(colonne);
 	}
-	public boolean canPose(int x,int y){
-		return pion[x][y]==0;
+	public boolean canPose(int ligne,int colonne){
+		return pion[ligne][colonne]==0;
 	}
-	public int whoIsTheCase(int x,int y){
+	public int whoIsTheCase(int ligne,int colonne){
 		int value=0;
-		if(pion[x][y]==1){
+		if(pion[ligne][colonne]==1){
 			value-=1;
-		}else if(pion[x][y]==2){
+		}else if(pion[ligne][colonne]==2){
 			value+=1;
 		}
 		
 		
-		if(pion[x+1][y]==1){
+		if(pion[ligne+1][colonne]==1){
 			value-=1;
-		}else if(pion[x+1][y]==2){
+		}else if(pion[ligne+1][colonne]==2){
 			value+=1;
 		}
 		
 		
-		if(pion[x][y+1]==1){
+		if(pion[ligne][colonne+1]==1){
 			value-=1;
-		}else if(pion[x][y+1]==2){
+		}else if(pion[ligne][colonne+1]==2){
 			value+=1;
 		}
 		
-		if(pion[x+1][y+1]==1){
+		if(pion[ligne+1][colonne+1]==1){
 			value-=1;
-		}else if(pion[x+1][y+1]==2){
+		}else if(pion[ligne+1][colonne+1]==2){
 			value+=1;
 		}
 		
