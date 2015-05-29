@@ -3,9 +3,7 @@ package fr.univ_artois._24_iut_info.game;
 public class PlayerHuman extends Player {
 
 	
-	
-	
-	
+
 	
 	public PlayerHuman(int nbTwist, Game game) {
 		super(nbTwist, game);
