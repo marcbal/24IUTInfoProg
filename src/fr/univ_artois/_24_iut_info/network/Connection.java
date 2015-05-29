@@ -21,10 +21,11 @@ public class Connection {
 	
 	
 	public Connection(InetSocketAddress a, String nomEquipe, ReceiveListener l) throws IOException {
-		if (a == null || nomEquipe == null)
+		if (a == null || nomEquipe == null || l == null)
 			throw new IllegalArgumentException("les arguments ne peuvent pas être null");
 		socket = new DatagramSocket();
 		addr = a;
+		listener = l;
 		
 		receiverThread = new Thread(() -> {
 			DatagramPacket packet = new DatagramPacket(new byte[4096], 4096);
@@ -145,6 +146,12 @@ public class Connection {
 	
 	
 	
+	
+	
+	
+	public synchronized void sendTwistLock(int ligne, char colonne, int coin) throws IOException {
+		send(""+ligne+colonne+coin);
+	}
 	
 	
 	
