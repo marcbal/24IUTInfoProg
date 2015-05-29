@@ -26,6 +26,16 @@ public abstract class Player {
 	
 	private void sendTurn(int x, int y){
 		
+		if(game.getMap().canPose(x, y)){
+			game.getMap().poser(x, y, this.id);
+			//game.getConnection().send(); //TODO
+		}
+		else{
+			//gestion erreur
+		}
+		
+		this.nbTwist--;
+		
 	}
 	
 	public int getNbTwist(){

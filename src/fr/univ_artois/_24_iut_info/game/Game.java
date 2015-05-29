@@ -5,8 +5,7 @@ import java.net.InetSocketAddress;
 
 import fr.univ_artois._24_iut_info.network.Connection;
 
-public class Game {
-	
+public class Game {	
 	
 	
 	
@@ -18,7 +17,11 @@ public class Game {
 	
 	private boolean isEnd;
 	
-	int nbPlayers = 2;
+	private int nbPlayers = 2;
+	
+	private int nbTwist = 10;
+	
+	
 	
 	public Game(){
 		//gestion des variables
@@ -69,8 +72,8 @@ public class Game {
 				e.printStackTrace();
 			}
 			
-			if(tmp == 1 )players[i] = new PlayerHuman();
-			else players[i] = new PLayerIA();
+			if(tmp == 1 )players[i] = new PlayerHuman(nbTwist,this);
+			else players[i] = new PLayerIA(nbTwist,this);
 		}	
 		
 	}
@@ -104,17 +107,22 @@ public class Game {
 	
 	//TODO a coder
 	private void isGameEnd(){
-		
+		this.isEnd = players[0].getNbTwist() == 0 && players[0].getNbTwist() == 1;
+		//TODO tester avec la map la place libre
 	}
 	
 	
+	//TODO a coder
 	private void onGameEnd(){
-		
 	}
 	
 	
 	public Map getMap(){
 		return this.map;
+	}
+	
+	public Connection getConnection(){
+		return this.con;
 	}
 
 }
