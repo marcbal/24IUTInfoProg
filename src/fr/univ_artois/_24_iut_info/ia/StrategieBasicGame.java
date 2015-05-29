@@ -27,7 +27,8 @@ public class StrategieBasicGame extends AbstractStrategieGame {
 		}
 		return turnMaxPointCaptured;
 	}
-
+	
+	
 	public Coordonnee playTurn()
 	{
 		int ligne; 
