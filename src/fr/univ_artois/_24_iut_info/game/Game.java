@@ -52,6 +52,7 @@ public class Game implements ReceiveListener {
 
 	@Override
 	public void onGameStart(String mapStr) {
+		map = new Map();
 		map.decode(mapStr);		
 	}
 
