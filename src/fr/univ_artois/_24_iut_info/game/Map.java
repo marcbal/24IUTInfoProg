@@ -139,7 +139,7 @@ public class Map implements Cloneable{
 	public int getColonne(){
 		return map.get(0).size();
 	}
-	public boolean isLocked(int x,int y, int id){
+	public boolean isLocked(int x,int y, byte id){
 		int value=0;
 		if(pion[x][y]==id){
 			value+=1;
