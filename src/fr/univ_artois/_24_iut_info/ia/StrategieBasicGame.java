@@ -3,8 +3,6 @@ package fr.univ_artois._24_iut_info.ia;
 
 import java.util.List;
 
-import fr.univ_artois._24_iut_info.game.Map;
-
 import java.util.ArrayList;
 
 
@@ -100,6 +98,8 @@ public class StrategieBasicGame extends AbstractStrategieGame {
 			}
 			 
 		}
+		
+		return null; // permet de compiler correctement
 	}
 	
 	

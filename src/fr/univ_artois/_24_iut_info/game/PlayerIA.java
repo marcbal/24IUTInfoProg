@@ -16,7 +16,7 @@ public class PlayerIA extends Player {
 		// TODO Auto-generated method stub
 		StrategieBasicGame st = new StrategieBasicGame(game);
 		Coordonnee playCoordonnee = st.playTurn();
-		sendTurn(playCoordonnee.getX(), playCoordonnee.getY());
+		trySendTurn(playCoordonnee.getX(), playCoordonnee.getY());
 	}
 	
 	
