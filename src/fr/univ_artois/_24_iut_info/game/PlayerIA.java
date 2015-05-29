@@ -9,20 +9,12 @@ public class PlayerIA extends Player {
 	
 	public PlayerIA(int nbTwist, Game game, int id) {
 		super(nbTwist, game, id);
-<<<<<<< HEAD
 		this.st = new TestStrategieGame(game);
-=======
->>>>>>> branch 'master' of https://github.com/marcbal/24IUTInfoProg
 	}
 
 	@Override
 	public void play() {
-<<<<<<< HEAD
 		// TODO Auto-generated method stub
-		//StrategieBasicGame st = new StrategieBasicGame(game);
-=======
-		AbstractStrategieGame st = new TestStrategieGame(game);
->>>>>>> branch 'master' of https://github.com/marcbal/24IUTInfoProg
 		Coordonnee playCoordonnee = st.playTurn();
 		if (!trySendTurn(playCoordonnee.getX(), playCoordonnee.getY()))
 			System.err.println("L'IA n'a pas pu envoyer son résultat au serveur car l'état actuel du jeu ne le permet pas");
@@ -31,6 +23,8 @@ public class PlayerIA extends Player {
 	
 	public void playTest(){
 		Coordonnee playCoordonnee = st.playTurn();
+		game.getMap().poser(playCoordonnee.getX(), playCoordonnee.getY(), id);
+		
 		System.out.println(playCoordonnee.getX() + "   :   " + playCoordonnee.getY());
 	}
 	
