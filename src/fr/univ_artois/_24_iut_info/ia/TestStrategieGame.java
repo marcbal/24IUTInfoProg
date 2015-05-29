@@ -69,7 +69,6 @@ public class TestStrategieGame extends AbstractStrategieGame {
 
 
 
-
 	@Override
 	public Coordonnee playTurn() {
 		ArrayList<InstanceTmpGame>  maps = new ArrayList<InstanceTmpGame> ();
@@ -98,5 +97,4 @@ public class TestStrategieGame extends AbstractStrategieGame {
 		
 		
 	}
-
 }

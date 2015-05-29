@@ -1,5 +1,8 @@
 package fr.univ_artois._24_iut_info.ia;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import fr.univ_artois._24_iut_info.game.Map;
 
 public class TurnPossibility {
@@ -74,6 +77,23 @@ public class TurnPossibility {
 			return 0;
 
 		return (scoreLocked(mapAfter,enemy) - scoreLocked(map,enemy)) ;
+	}
+	
+	public List<Coordonnee> nbFormat(int x, int y){
+		List<Coordonnee> cmpt = new ArrayList<Coordonnee>();
+		if(this.mapAfter.canPose(this.x,this.y))
+		for(int i=0;i<2;i++)
+			for(int j=0;j<2;j++){
+				int x2 = this.x-1+i;
+				int y2 = this.y-1+j;
+				if(x2>=0&&y2>=0){
+					int [] format;
+					format = map.getFormat(x2, y2, joueur);
+					if(format[0]==i && format[0]==j)
+						cmpt.add(new Coordonnee(x2,y2));
+				}
+			}
+		return cmpt;
 	}
 	
 	public int getX() {

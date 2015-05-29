@@ -19,8 +19,6 @@ public class Game implements ReceiveListener {
 	private Player playerEnnemy;
 	private Player playerUs;
 	
-	private int nbTwist = 10;
-	
 	
 	public Game(){
 		try {
@@ -46,10 +44,10 @@ public class Game implements ReceiveListener {
 	public void onPlayerSet(int playerId) {
 		
 		playerUs = (Main.HUMAIN) ?
-				new PlayerHuman(nbTwist,this, playerId) :
-				new PlayerIA(nbTwist,this, playerId);
+				new PlayerHuman(Main.NB_TWIST_START,this, playerId) :
+				new PlayerIA(Main.NB_TWIST_START,this, playerId);
 		
-		playerEnnemy = new EnemyPlayer(nbTwist, this, (playerId == 1)?2:1);
+		playerEnnemy = new EnemyPlayer(Main.NB_TWIST_START, this, (playerId == 1)?2:1);
 		
 		
 		
@@ -78,7 +76,7 @@ public class Game implements ReceiveListener {
 
 	@Override
 	public void onRoundStart() {
-		System.out.println("c'est au joueur " + playerUs.getCouleur() + " de jouer");
+		System.out.println("c'est à nous de jouer");
 		
 		playerUs.play();
 	}

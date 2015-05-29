@@ -91,7 +91,11 @@ public class Map implements Cloneable{
 	
 	
 	public boolean canPose(int ligne,int colonne){
-		return pion[ligne][colonne]==0;
+		try {
+			return pion[ligne][colonne]==0;
+		} catch(ArrayIndexOutOfBoundsException e) {
+			return false;
+		}
 	}
 	
 	
