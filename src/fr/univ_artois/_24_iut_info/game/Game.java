@@ -16,11 +16,10 @@ public class Game implements ReceiveListener {
 	
 	private Connection con;
 	
-	private Player[] players;
+	private Player playerEnnemy;
+	private Player playerUs;
 	
 	private int nbTwist = 10;
-	
-	private int playerTurn = 0;
 	
 	
 	public Game(){
@@ -38,22 +37,13 @@ public class Game implements ReceiveListener {
 	@Override
 	public void onPlayerSet(int playerId) {
 		
-		this.players = new Player[2];
+		playerUs = (Main.HUMAIN) ?
+				new PlayerHuman(nbTwist,this, playerId) :
+				new PLayerIA(nbTwist,this, playerId);
 		
-		Player playerTmp = (Main.HUMAIN) ?
-				new PlayerHuman(nbTwist,this) :
-				new PLayerIA(nbTwist,this);
+		playerEnnemy = new EnemyPlayer(nbTwist, this, (playerId == 1)?2:1);
 		
 		
-		
-		if(playerId == 1){			
-			players[0] = playerTmp;			
-			players[1] = new EnemyPlayer(nbTwist, this);
-		}
-		else{
-			players[1] = playerTmp;			
-			players[0] = new EnemyPlayer(nbTwist, this);
-		}
 		
 	}
 
@@ -70,9 +60,7 @@ public class Game implements ReceiveListener {
 
 	@Override
 	public void onOpponentPlay(int ligne, char colonne, int coin) {
-		map.poser(ligne, colonne, coin, players[playerTurn].getId());
-		playerTurn++;
-		playerTurn%=2;
+		map.poser(ligne, colonne, coin, playerEnnemy.getId());
 	}
 
 
@@ -80,45 +68,35 @@ public class Game implements ReceiveListener {
 
 	@Override
 	public void onRoundStart() {
-		playerTurn++;
-		playerTurn%=2;
+		System.out.println("c'est au joueur " + playerUs.getCouleur() + " de jouer");
 		
-		System.out.println("c'est au joueur " + players[playerTurn].getCouleur() + " de jouer");
-		
-		players[playerTurn].play();
-		
-		
+		playerUs.play();
 	}
 
 
 	@Override
 	public void onIllegalPlay() {
-		System.err.println("le serveur indique que le coup n'étais pas bon");
-		
+		System.err.println("le serveur indique que notre coup n'étais pas bon");
 	}
 
 
 	@Override
 	public void onOpponentPlayIllegal() {
-		System.err.println("le serveur indique que l'enemy a jouer un coup illegal");
-		playerTurn++;
-		playerTurn%=2;
-		
+		System.err.println("le serveur indique que l'ennemi a jouer un coup illegal");
 	}
 
 
 	@Override
 	public void onPlayerCantPlay() {
-		System.err.println("ce n'est plus votre tour de jouer");
-		
+		System.err.println("vous ne pouvez plus jouer");
 	}
 
 
 	@Override
 	public void onGameFinish(String serverMessage) {
 		System.out.println(serverMessage);
-		
 	}
+	
 	
 	public Map getMap(){
 		return this.map;
