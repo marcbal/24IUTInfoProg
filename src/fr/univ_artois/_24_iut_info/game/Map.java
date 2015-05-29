@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Map {
 	private List<List<Integer>> map=new ArrayList<List<Integer>>();
-	
+	private Byte[][] pion;
 	Map(String str){
 		decode(str);
 	}
@@ -20,5 +20,8 @@ public class Map {
 				list.add(Integer.parseInt(cas)); 
 			}
 		}
+		
+		pion=new Byte[map.size()+1][map.get(0).size()+1];
+		
 	}
 }
