@@ -30,15 +30,15 @@ public class Connection {
 		socket.connect(addr);
 		
 		receiverThread = new Thread(() -> {
-			DatagramPacket packet = new DatagramPacket(new byte[4096], 4096);
+			DatagramPacket packet = new DatagramPacket(new byte[4096], 4096, addr);
 			
 				try {
 					while(true) {
 						socket.receive(packet);
 
-						System.out.println("[Client <- Serveur] "+new String(packet.getData(), charset));
+						System.out.println("[Client <- Serveur] "+new String(packet.getData(), charset).substring(0, packet.getLength()));
 						
-						String[] data = new String(packet.getData(), charset).split("[:-]", 2);
+						String[] data = new String(packet.getData(), charset).substring(0, packet.getLength()).split("[:-]", 2);
 
 						
 						if (data.length != 2) {
@@ -50,8 +50,6 @@ public class Connection {
 						
 						try {
 							interpreteReceivedMessage(data[0], data[1]);
-							
-							System.out.println("Serveur : "+Arrays.toString(data));
 						} catch (Exception e) {
 							System.err.println("erreur d'interprétation du message du serveur : ");
 							System.err.println(Arrays.toString(data));
