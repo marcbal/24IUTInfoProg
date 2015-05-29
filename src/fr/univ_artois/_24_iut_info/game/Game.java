@@ -133,7 +133,7 @@ public class Game implements ReceiveListener {
 	
 	
 	public void playTest(){
-		for (int i = 0; i < 8; i++) {
+		for (int i = 0; i < 987; i++) {
 			((PlayerIA)playerUs).playTest();
 			System.out.println(map);
 			((PlayerIA)playerEnnemy).playTest();
