@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 
 import fr.univ_artois._24_iut_info.network.Connection;
+import fr.univ_artois._24_iut_info.network.ReceiveListener;
 
-public class Game {
-	
+public class Game implements ReceiveListener {	
 	
 	
 	
@@ -16,105 +16,127 @@ public class Game {
 	
 	private Player[] players;
 	
-	private boolean isEnd;
+	private int nbTwist = 10;
 	
-	int nbPlayers = 2;
+	private String nomEquipe = "";
 	
-	public Game(){
-		//gestion des variables
-		this.isEnd = false;
-		
-		
-		
-		int addr = 0;
+	private int playerTurn = 0;
+	
+	
+	
+	public Game(String addr, int port){
 		try {
-			con = new Connection(new InetSocketAddress(addr));
+			con = new Connection(new InetSocketAddress(addr,port),this.nomEquipe ,this);
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.exit(0);
 		}
 		
-		
-		//TODO recupreation des la map par la connection
-		String tmp = "";
-		map.decode(tmp);
-		
-		this.initPlayer();
-		
-		this.gameLoop();
-		
 	}
-	
-	
-	
-	
-	private void initPlayer(){
+
+
+
+
+	@Override
+	public void onPlayerSet(int playerId) {
 		
+		this.players = new PlayerHuman[2];
 		
-		this.players = new Player[nbPlayers];
+		int tmp = 1;
 		
-		
-		
-		//creation des joueurs
-		for (int i = 0; i < nbPlayers; i++) {
-			System.out.println("Joueur " + (i+1) + " Humain(1) ou IA(2)");
-			
-			int tmp = 1;
-			
-			
-			//TODO gestion d'erreur en cas d'abruti qui rentre n'importe quoi
-			try {
-				tmp = System.in.read();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			
-			if(tmp == 1 )players[i] = new PlayerHuman();
-			else players[i] = new PLayerIA();
-		}	
-		
-	}
-	
-	
-	private void gameLoop(){
-		
-		
-		int playerTurn = 0;
-		
-		while(!isEnd){
-			
-			players[playerTurn].play();
-			
-			
-			//TODO calcule des points
-			
-			this.isGameEnd();
-			
-			
-			
+		Player playerTmp;
+		//TODO gestion d'erreur en cas d'abruti qui rentre n'importe quoi
+		try {
+			tmp = System.in.read();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		
+		if(tmp == 1 )playerTmp = new PlayerHuman(nbTwist,this);
+		else playerTmp = new PLayerIA(nbTwist,this);
 		
-		this.onGameEnd();
 		
+		if(playerId == 1){			
+			players[0] = playerTmp;			
+			players[1] = new EnemyPlayer(nbTwist, this);
+		}
+		else{			
+			players[1] = playerTmp;			
+			players[0] = new EnemyPlayer(nbTwist, this);
+		}
+		
+	}
+
+
+
+
+	@Override
+	public void onGameStart(String mapStr) {
+		map.decode(mapStr);		
+	}
+
+
+
+
+	@Override
+	public void onOpponentPlay(int ligne, char colonne, int coin) {
+		//map.poser(x, y, id); //TODO
+		
+	}
+
+
+
+
+	@Override
+	public void onRoundStart() {
+		playerTurn++;
+		playerTurn%=2;
+		
+		System.out.println("c'est au joueur " + players[playerTurn].getCouleur() + " de jouer");
+		
+		players[playerTurn].play();
 		
 		
 	}
-	
-	
-	//TODO a coder
-	private void isGameEnd(){
+
+
+	@Override
+	public void onIllegalPlay() {
+		System.err.println("le serveur indique que le coup n'étais pas bon");
+		
+	}
+
+
+	@Override
+	public void onOpponentPlayIllegal() {
+
+		System.err.println("le serveur indique que l'enemy a jouer un coup illegal");
+		
+	}
+
+
+	@Override
+	public void onPlayerCantPlay() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void onGameFinish(String serverMessage) {
+		System.out.println(serverMessage);
 		
 	}
 	
-	
-	private void onGameEnd(){
-		
-	}
+
 	
 	
 	public Map getMap(){
 		return this.map;
+	}
+	
+	public Connection getConnection(){
+		return this.con;
 	}
 
 }
