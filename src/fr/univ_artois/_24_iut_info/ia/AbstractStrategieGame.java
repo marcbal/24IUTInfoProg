@@ -14,6 +14,6 @@ public abstract class AbstractStrategieGame {
 		this.game =  game;
 	}
 	
-	public abstract void playTurn();
+	public abstract Coordonnee playTurn();
 	
 }

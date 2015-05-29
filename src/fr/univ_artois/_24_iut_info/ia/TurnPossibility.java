@@ -37,4 +37,12 @@ public class TurnPossibility {
 		return 0;
 	}
 	
+	public int getX() {
+		return x;
+	}
+	
+	public int getY() {
+		return y;
+	}
+	
 }
