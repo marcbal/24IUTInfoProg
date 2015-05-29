@@ -9,7 +9,7 @@ public class Map {
 	Map(String str){
 		decode(str);
 	}
-	private void decode(String str){
+	public void decode(String str){
 		String[] lignes=str.split("|");
 		
 		for(String ligne : lignes){
@@ -17,7 +17,7 @@ public class Map {
 			List<Integer> list=new ArrayList<Integer>();
 			map.add(list);
 			for(String cas:cases){
-				list.add(Integer.parseInt(cas));
+				list.add(Integer.parseInt(cas)); 
 			}
 		}
 	}
