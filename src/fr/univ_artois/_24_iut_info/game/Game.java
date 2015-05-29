@@ -1,6 +1,7 @@
 package fr.univ_artois._24_iut_info.game;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.InetSocketAddress;
 
 import fr.univ_artois._24_iut_info.Main;
@@ -18,17 +19,15 @@ public class Game implements ReceiveListener {
 	private Player[] players;
 	
 	private int nbTwist = 10;
-	private String nomEquipe = "Les mounny python";
 	
 	private int playerTurn = 0;
 	
 	
 	public Game(){
 		try {
-			con = new Connection(new InetSocketAddress(Main.SERVER_HOST,Main.SERVER_PORT),Main.NOM_EQUIPE ,this);
+			con = new Connection(new InetSocketAddress(InetAddress.getByName(Main.SERVER_HOST),Main.SERVER_PORT),Main.NOM_EQUIPE ,this);
 		} catch (IOException e) {
 			e.printStackTrace();
-			System.exit(0);
 		}
 		
 	}
@@ -71,8 +70,8 @@ public class Game implements ReceiveListener {
 
 	@Override
 	public void onOpponentPlay(int ligne, char colonne, int coin) {
-		//map.poser(x, y, id); //TODO
-		
+		map.poser(ligne, colonne, coin, players[playerTurn].getId());
+		endTurn();
 	}
 
 
@@ -80,12 +79,12 @@ public class Game implements ReceiveListener {
 
 	@Override
 	public void onRoundStart() {
-		playerTurn++;
-		playerTurn%=2;
 		
 		System.out.println("c'est au joueur " + players[playerTurn].getCouleur() + " de jouer");
 		
 		players[playerTurn].play();
+		
+		endTurn();
 		
 		
 	}
@@ -100,15 +99,15 @@ public class Game implements ReceiveListener {
 
 	@Override
 	public void onOpponentPlayIllegal() {
-
 		System.err.println("le serveur indique que l'enemy a jouer un coup illegal");
+		endTurn();
 		
 	}
 
 
 	@Override
 	public void onPlayerCantPlay() {
-		// TODO Auto-generated method stub
+		System.err.println("ce n'est plus votre tour de jouer");
 		
 	}
 
@@ -119,7 +118,14 @@ public class Game implements ReceiveListener {
 		
 	}
 	
-
+	
+	private void endTurn(){
+		System.out.println("joueur suivant");
+		System.out.println(map.toString());
+		playerTurn++;
+		playerTurn%=2;
+		
+	}
 	
 	
 	public Map getMap(){

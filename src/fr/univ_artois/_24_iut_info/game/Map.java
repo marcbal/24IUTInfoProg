@@ -66,7 +66,23 @@ public class Map implements Cloneable{
 		pion[ligne][colonne]=(byte)id;
 	}
 	
-	
+	public int nbPion(){
+		int value=0;
+		for(byte[] ligne:this.pion){
+			for(byte b:ligne){
+				value+=b;
+			}
+		}
+		return value;
+	}
+	public int getPoint(int ligne,char colonne){
+		colonne=Character.toUpperCase(colonne);
+		int col=colonne-'A';
+		return getPoint(ligne,col);
+	}
+	public int getPoint(int ligne,int colonne){
+		return map.get(ligne).get(colonne);
+	}
 	public boolean canPose(int x,int y){
 		return pion[x][y]==0;
 	}
