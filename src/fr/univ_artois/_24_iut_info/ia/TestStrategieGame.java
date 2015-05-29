@@ -22,8 +22,8 @@ public class TestStrategieGame extends AbstractStrategieGame {
 		Map acutalMap = null ;//= game.getMap();
 		ArrayList<Map> maps = new ArrayList<Map>();
 		
-		for(int ligne =0 ; ligne<0 ; ligne ++){
-			for(int colonne =0 ; colonne<0 ; colonne ++){
+		for(int ligne = 0 ; ligne<acutalMap.getLigne()+1 ; ligne ++){
+			for(int colonne =0 ; acutalMap.getColonne()+1<0 ; colonne ++){
 				if(acutalMap.canPose(ligne, colonne)){
 					Map tmp = acutalMap.clone();
 					tmp.poser(ligne, colonne, 0);
@@ -32,6 +32,11 @@ public class TestStrategieGame extends AbstractStrategieGame {
 			}
 			
 		}
+		
+		
+		int max  = Integer.MIN_VALUE;
+		for(Map map:maps);
+			//if(map)
 		
 		
 		

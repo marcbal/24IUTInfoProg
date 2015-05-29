@@ -4,8 +4,8 @@ import fr.univ_artois._24_iut_info.game.Map;
 
 public class StrategieBasicGame extends AbstractStrategieGame {
 
-	public StrategieBasicGame(Map m) {
-		super(m);
+	public StrategieBasicGame(Game game) {
+		super(game);
 		// TODO Stub du constructeur généré automatiquement
 	}
 
