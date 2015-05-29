@@ -86,9 +86,44 @@ public class Map implements Cloneable{
 	public boolean canPose(int x,int y){
 		return pion[x][y]==0;
 	}
-	public byte whoIsTheCase(int x,int y){
-		return 0;
+	public int whoIsTheCase(int x,int y){
+		int value=0;
+		if(pion[x][y]==1){
+			value-=1;
+		}else if(pion[x][y]==2){
+			value+=1;
+		}
+		
+		
+		if(pion[x+1][y]==1){
+			value-=1;
+		}else if(pion[x+1][y]==2){
+			value+=1;
+		}
+		
+		
+		if(pion[x][y+1]==1){
+			value-=1;
+		}else if(pion[x][y+1]==2){
+			value+=1;
+		}
+		
+		if(pion[x+1][y+1]==1){
+			value-=1;
+		}else if(pion[x+1][y+1]==2){
+			value+=1;
+		}
+		
+		return value==0?0:(value<0?1:2);
 	}
+	
+	public int getLigne(){
+		return map.size();
+	}
+	public int getColonne(){
+		return map.get(0).size();
+	}
+	
 	@Override
 	public Map clone(){
 		Map m = new Map();
