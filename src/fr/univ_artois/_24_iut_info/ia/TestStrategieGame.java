@@ -39,12 +39,12 @@ public class TestStrategieGame extends AbstractStrategieGame {
 						Map tmp = actualMap.clone();
 						tmp.poser(ligne, colonne, p.getId());
 						
-						if(p instanceof EnemyPlayer){
+						//if(p instanceof EnemyPlayer){
 							calculePlayer(game.getUs(), nbTurn--, tmp, maps, coordTmp);
-						} 
-						else{
-							calculePlayer(game.getEnemy(), nbTurn--, tmp, maps, coordTmp);
-						}
+						//} 
+						//else{
+							//calculePlayer(game.getEnemy(), nbTurn--, tmp, maps, coordTmp);
+						//}
 					}
 				}
 			}
@@ -71,7 +71,7 @@ public class TestStrategieGame extends AbstractStrategieGame {
 	@Override
 	public Coordonnee playTurn() {
 		ArrayList<InstanceTmpGame>  maps = new ArrayList<InstanceTmpGame> ();
-		int nbTurn = 2;
+		int nbTurn = 0;
 		if(game.getMap().nbTroue()<2){
 			nbTurn = game.getMap().nbTroue()-1;
 		}
