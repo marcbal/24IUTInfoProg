@@ -4,16 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.univ_artois._24_iut_info.game.Game;
-import fr.univ_artois._24_iut_info.game.Map;
 
 public class StrategieBasicGame extends AbstractStrategieGame {
 
-	public StrategieBasicGame(Game g) {
-		super(g);
-		// TODO Stub du constructeur généré automatiquement
-	}
 
 	
+	public StrategieBasicGame(Game game) {
+		super(game);
+	}
+
 	private void playTurn()
 	{
 		int nbPions = game.getMap().nbPion(); //TODO a initialiser avec la methode de map
