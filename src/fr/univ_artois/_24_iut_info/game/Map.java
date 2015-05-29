@@ -66,6 +66,15 @@ public class Map implements Cloneable{
 		pion[ligne][colonne]=(byte)id;
 	}
 	
+	public int nbPion(){
+		int value=0;
+		for(byte[] ligne:this.pion){
+			for(byte b:ligne){
+				value+=b;
+			}
+		}
+		return value;
+	}
 	
 	public boolean canPose(int x,int y){
 		return pion[x][y]==0;
