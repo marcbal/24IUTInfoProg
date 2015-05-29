@@ -39,7 +39,7 @@ public class Game implements ReceiveListener {
 		
 		playerUs = (Main.HUMAIN) ?
 				new PlayerHuman(nbTwist,this, playerId) :
-				new PLayerIA(nbTwist,this, playerId);
+				new PlayerIA(nbTwist,this, playerId);
 		
 		playerEnnemy = new EnemyPlayer(nbTwist, this, (playerId == 1)?2:1);
 		
