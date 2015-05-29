@@ -44,12 +44,13 @@ public abstract class Player {
 			colonne--;
 			
 		try {
-			game.getConnection().sendTwistLock(ligne+1, (char) ('A'+colonne), coin);
+			if (!(this instanceof EnemyPlayer))
+				game.getConnection().sendTwistLock(ligne+1, (char) ('A'+colonne), coin);
+			this.nbTwist--;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
-		this.nbTwist--;
 		
 		return true;
 	}
