@@ -9,6 +9,14 @@ public class StrategieBasicGame extends AbstractStrategieGame {
 		// TODO Stub du constructeur généré automatiquement
 	}
 
+	@Override
+	public void playTurn() {
+		// TODO Stub de la méthode généré automatiquement
+		
+	}
+
+	
+	public 
 	
 	
 	

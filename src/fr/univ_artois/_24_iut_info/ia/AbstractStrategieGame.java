@@ -11,4 +11,6 @@ public abstract class AbstractStrategieGame {
 		_map = m;
 	}
 	
+	public abstract void playTurn();
+	
 }
