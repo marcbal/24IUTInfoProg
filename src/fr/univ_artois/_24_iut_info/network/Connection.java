@@ -148,6 +148,12 @@ public class Connection {
 	
 	
 	
+	public synchronized void sendTwistLock(int ligne, char colonne, int coin) throws IOException {
+		send(""+ligne+colonne+coin);
+	}
+	
+	
+	
 	
 	
 	@SuppressWarnings("serial")
