@@ -70,7 +70,7 @@ public class Game implements ReceiveListener {
 
 	@Override
 	public void onRoundStart() {
-		System.out.println("c'est au joueur " + playerUs.getCouleur() + " de jouer");
+		System.out.println("c'est à nous de jouer");
 		
 		playerUs.play();
 	}
@@ -106,6 +106,15 @@ public class Game implements ReceiveListener {
 	
 	public Connection getConnection(){
 		return this.con;
+	}
+	
+	
+	public Player getUs(){
+		return playerUs;
+	}
+	
+	public Player getEnemy(){
+		return this.playerEnnemy;
 	}
 
 }

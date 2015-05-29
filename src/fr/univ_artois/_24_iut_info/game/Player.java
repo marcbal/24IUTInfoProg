@@ -14,6 +14,8 @@ public abstract class Player {
 	public Player(int nbTwist, Game game, int id){
 		this.id = id;
 		
+		this.game = game;
+		
 		this.nbTwist = nbTwist;
 		
 		
