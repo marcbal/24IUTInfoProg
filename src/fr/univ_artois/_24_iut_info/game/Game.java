@@ -107,5 +107,14 @@ public class Game implements ReceiveListener {
 	public Connection getConnection(){
 		return this.con;
 	}
+	
+	
+	public Player getUs(){
+		return playerUs;
+	}
+	
+	public Player getEnemy(){
+		return this.playerEnnemy;
+	}
 
 }

@@ -87,6 +87,9 @@ public class Map implements Cloneable{
 	public int getPoint(int ligne,int colonne){
 		return map.get(ligne).get(colonne);
 	}
+	
+	
+	
 	public boolean canPose(int ligne,int colonne){
 		try {
 			return pion[ligne][colonne]==0;
@@ -94,6 +97,9 @@ public class Map implements Cloneable{
 			return false;
 		}
 	}
+	
+	
+	
 	public int whoIsTheCase(int ligne,int colonne){
 		int value=0;
 		if(pion[ligne][colonne]==1){
