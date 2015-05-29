@@ -16,16 +16,20 @@ public class PlayerHuman extends Player {
 		System.out.println("Coordonnée où positionner le twist-lock (exemple : \"0 5\")");
 		
 		try {
-			String in = keyboard.nextLine();
 			
-			String[] coordsStr = in.split(" ");
+			boolean ok = false;
 			
-	
-			sendTurn(Integer.parseInt(coordsStr[0]), Integer.parseInt(coordsStr[1]));
+			do {
+				String in = keyboard.nextLine();
+				String[] coordsStr = in.split(" ");
+				ok = trySendTurn(Integer.parseInt(coordsStr[0]), Integer.parseInt(coordsStr[1]));
+				if (!ok)
+					System.err.println("Ne peut pas poser à cet endroit");
+			} while(!ok);
 			
 		} catch(Exception e) {
 			System.err.println("Erreur de saisie, on envoie 0 0 au serveur");
-			sendTurn(0, 0);
+			trySendTurn(0, 0);
 		}
 		
 	}

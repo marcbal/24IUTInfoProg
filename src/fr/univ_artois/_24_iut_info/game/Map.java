@@ -1,7 +1,6 @@
 package fr.univ_artois._24_iut_info.game;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Map implements Cloneable{
@@ -19,6 +18,7 @@ public class Map implements Cloneable{
 			if(ligne.isEmpty()){
 				continue;
 			}
+			
 			String[] cases = ligne.split(":");
 			List<Integer> list=new ArrayList<Integer>();
 			map.add(list);
@@ -87,34 +87,34 @@ public class Map implements Cloneable{
 	public int getPoint(int ligne,int colonne){
 		return map.get(ligne).get(colonne);
 	}
-	public boolean canPose(int x,int y){
-		return pion[x][y]==0;
+	public boolean canPose(int ligne,int colonne){
+		return pion[ligne][colonne]==0;
 	}
-	public int whoIsTheCase(int x,int y){
+	public int whoIsTheCase(int ligne,int colonne){
 		int value=0;
-		if(pion[x][y]==1){
+		if(pion[ligne][colonne]==1){
 			value-=1;
-		}else if(pion[x][y]==2){
+		}else if(pion[ligne][colonne]==2){
 			value+=1;
 		}
 		
 		
-		if(pion[x+1][y]==1){
+		if(pion[ligne+1][colonne]==1){
 			value-=1;
-		}else if(pion[x+1][y]==2){
+		}else if(pion[ligne+1][colonne]==2){
 			value+=1;
 		}
 		
 		
-		if(pion[x][y+1]==1){
+		if(pion[ligne][colonne+1]==1){
 			value-=1;
-		}else if(pion[x][y+1]==2){
+		}else if(pion[ligne][colonne+1]==2){
 			value+=1;
 		}
 		
-		if(pion[x+1][y+1]==1){
+		if(pion[ligne+1][colonne+1]==1){
 			value-=1;
-		}else if(pion[x+1][y+1]==2){
+		}else if(pion[ligne+1][colonne+1]==2){
 			value+=1;
 		}
 		
@@ -139,6 +139,23 @@ public class Map implements Cloneable{
 	public int getColonne(){
 		return map.get(0).size();
 	}
+	public boolean isLocked(int x,int y, byte id){
+		int value=0;
+		if(pion[x][y]==id){
+			value+=1;
+		}
+		if(pion[x+1][y]==id){
+			value+=1;
+		}
+		if(pion[x][y+1]==id){
+			value+=1;
+		}
+		
+		if(pion[x+1][y+1]==id){
+			value+=1;
+		}
+		return value>=3;
+	}
 	
 	@Override
 	public Map clone(){
@@ -159,6 +176,45 @@ public class Map implements Cloneable{
 		
 		// on renvoie le clone
 	    return m;
+	}
+	
+
+	
+	@Override
+	public String toString(){
+		StringBuffer buffer = new StringBuffer();
+		
+		
+		
+		for(List<Integer> ligne:map){
+			buffer.append("---------------------------\n");
+			
+			for(int value:ligne){
+				buffer.append("|"+value);
+			}
+			buffer.append("|\n");
+		}
+		
+		return buffer.toString();
+	}
+		
+		
+		
+		
+
+
+	public int [] getFormat(int x, int y, byte p){
+		int [] format = {0,0};
+		byte e= (byte) ((p%2)+1);
+		for(int i=0;i<2;i++)
+			for(int j=0;j<2;j++)
+				if(pion[x+i][y+j]==p)
+					format[0]++;
+				else if (pion[x+i][y+j]== e)
+					format[1]++;
+				
+		return format;
+
 	}
 	
 }
