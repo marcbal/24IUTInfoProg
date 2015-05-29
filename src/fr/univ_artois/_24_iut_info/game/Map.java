@@ -15,6 +15,9 @@ public class Map implements Cloneable{
 		String[] lignes=str.split("|");
 		
 		for(String ligne : lignes){
+			if(ligne.isEmpty()){
+				continue;
+			}
 			String[] cases = ligne.split(":");
 			List<Integer> list=new ArrayList<Integer>();
 			map.add(list);
