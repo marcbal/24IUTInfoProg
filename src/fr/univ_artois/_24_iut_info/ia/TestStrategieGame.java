@@ -15,9 +15,7 @@ public class TestStrategieGame extends AbstractStrategieGame {
 	
 	
 	private void calculePlayer(Player p, int nbTurn, Map actualMap, ArrayList<InstanceTmpGame> maps, Coordonnee first){
-
-		
-		
+	
 		for(int ligne = 0 ; ligne<actualMap.getLigne()+1 ; ligne ++){
 			for(int colonne =0 ; colonne<actualMap.getColonne()+1 ; colonne ++){
 

@@ -252,5 +252,16 @@ public class Map implements Cloneable{
 		return format;
 
 	}
+	public int nbTroue(){
+		int value=0;
+		for(int i=0;i<pion.length;i++){
+			for(int j=0;j<pion[0].length;j++){
+				if(pion[i][j]==0){
+					value++;
+				}
+			}
+		}
+		return value;
+	}
 	
 }
