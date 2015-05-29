@@ -9,6 +9,8 @@ public class Map {
 	Map(String str){
 		decode(str);
 	}
+	
+	
 	public void decode(String str){
 		String[] lignes=str.split("|");
 		
