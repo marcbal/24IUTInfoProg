@@ -27,12 +27,16 @@ public class Connection {
 		addr = a;
 		listener = l;
 		
+		socket.connect(addr);
+		
 		receiverThread = new Thread(() -> {
 			DatagramPacket packet = new DatagramPacket(new byte[4096], 4096);
 			
 				try {
 					while(true) {
 						socket.receive(packet);
+
+						System.out.println("[Client <- Serveur] "+new String(packet.getData(), charset));
 						
 						String[] data = new String(packet.getData(), charset).split("[:-]", 2);
 
@@ -70,6 +74,7 @@ public class Connection {
 	
 	
 	private void send(String s) throws IOException {
+		System.out.println("[Client -> Serveur] "+s);
 		byte[] bytes = s.getBytes(charset);
 		socket.send(new DatagramPacket(bytes, bytes.length, addr));
 	}
