@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
+import java.net.SocketTimeoutException;
 import java.nio.charset.Charset;
-import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -28,6 +28,7 @@ public class Connection {
 		listener = l;
 		
 		socket.setSoTimeout(10000); // timeout de 10 secondes
+		System.out.println("Connexion au serveur à l'adresse "+addr.toString());
 		socket.connect(addr);
 		
 		receiverThread = new Thread(() -> {
@@ -36,15 +37,16 @@ public class Connection {
 				try {
 					while(true) {
 						socket.receive(packet);
-
-						System.out.println("[Client <- Serveur] "+new String(packet.getData(), charset).substring(0, packet.getLength()));
 						
-						String[] data = new String(packet.getData(), charset).substring(0, packet.getLength()).split("[:-]", 2);
+						String dataStr = new String(packet.getData(), charset).substring(0, packet.getLength());
 
+						System.out.println("[Serveur] "+dataStr);
+						
+						String[] data = dataStr.split("[:-]", 2);
+						
 						
 						if (data.length != 2) {
-							System.err.println("message du serveur mal formé : ");
-							System.err.println(Arrays.toString(data));
+							System.err.println("message du serveur mal formé");
 							continue;
 						}
 						
@@ -52,12 +54,13 @@ public class Connection {
 						try {
 							interpreteReceivedMessage(data[0], data[1]);
 						} catch (Exception e) {
-							System.err.println("erreur d'interprétation du message du serveur : ");
-							System.err.println(Arrays.toString(data));
+							System.err.println("erreur lors de la prise en charge du message du serveur");
 							e.printStackTrace();
 						}
 						
 					}
+				} catch (SocketTimeoutException e) {
+					System.err.println("Le serveur a prit trop de temps à répondre");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -73,7 +76,7 @@ public class Connection {
 	
 	
 	private void send(String s) throws IOException {
-		System.out.println("[Client -> Serveur] "+s);
+		System.out.println("[Client] "+s);
 		byte[] bytes = s.getBytes(charset);
 		socket.send(new DatagramPacket(bytes, bytes.length, addr));
 	}
