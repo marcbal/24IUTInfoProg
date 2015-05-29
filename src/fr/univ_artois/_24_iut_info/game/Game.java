@@ -18,6 +18,7 @@ public class Game implements ReceiveListener {
 	
 	private Player playerEnnemy;
 	private Player playerUs;
+	private boolean test = false;
 	
 	
 	public Game(){
@@ -30,11 +31,13 @@ public class Game implements ReceiveListener {
 	}
 	
 	
-	public Game(boolean test, Map map){
+	public Game(Map map){
 		this.map = map;
+		test = true;
 		
 		playerUs = new PlayerIA(Main.NB_TWIST_START,this,1);
 		playerEnnemy = new PlayerIA(Main.NB_TWIST_START,this,2);
+		playerEnnemy.isEnnemy = true;
 	}
 
 
@@ -42,7 +45,7 @@ public class Game implements ReceiveListener {
 
 	@Override
 	public void onPlayerSet(int playerId) {
-		
+		System.out.println("je suis id : " + playerId);
 		playerUs = (Main.HUMAIN) ?
 				new PlayerHuman(Main.NB_TWIST_START,this, playerId) :
 				new PlayerIA(Main.NB_TWIST_START,this, playerId);

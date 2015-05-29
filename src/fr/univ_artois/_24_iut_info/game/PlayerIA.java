@@ -10,12 +10,16 @@ public class PlayerIA extends Player {
 	public PlayerIA(int nbTwist, Game game, int id) {
 		super(nbTwist, game, id);
 		this.st = new TestStrategieGame(game);
+		isEnnemy = false;
 	}
 
 	@Override
 	public void play() {
 		Coordonnee playCoordonnee = st.playTurn();
-		if(playCoordonnee == null) playCoordonnee = new Coordonnee(0, 0);
+		if(playCoordonnee == null) {
+			playCoordonnee = new Coordonnee(0, 0);
+			System.out.println("c 'est null putain");
+		}
 		if (!trySendTurn(playCoordonnee.getX(), playCoordonnee.getY()))
 			System.err.println("L'IA n'a pas pu envoyer son résultat au serveur car l'état actuel du jeu ne le permet pas");
 	}

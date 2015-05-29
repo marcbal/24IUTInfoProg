@@ -29,9 +29,9 @@ public class TestStrategieGame extends AbstractStrategieGame {
 					
 					if(nbTurn == 0){
 						
-						Map tmp = actualMap.clone();
-						tmp.poser(ligne, colonne, p.getId());
-						maps.add(new InstanceTmpGame(tmp, coordTmp));
+						Map mapTmp = actualMap.clone();
+						mapTmp.poser(ligne, colonne, p.getId());
+						maps.add(new InstanceTmpGame(mapTmp, coordTmp));
 						//System.out.println("test");
 					}
 					else{
@@ -39,12 +39,12 @@ public class TestStrategieGame extends AbstractStrategieGame {
 						Map tmp = actualMap.clone();
 						tmp.poser(ligne, colonne, p.getId());
 						
-						if(p instanceof EnemyPlayer){
+						//if(p.isEnnemy){
 							calculePlayer(game.getUs(), nbTurn--, tmp, maps, coordTmp);
-						} 
-						else{
-							calculePlayer(game.getEnemy(), nbTurn--, tmp, maps, coordTmp);
-						}
+						//} 
+						//else{
+							//calculePlayer(game.getEnemy(), nbTurn--, tmp, maps, coordTmp);
+						//}
 					}
 				}
 			}
@@ -68,7 +68,7 @@ public class TestStrategieGame extends AbstractStrategieGame {
 		//map.decode("5:7:52|52:49:24|26:28:22");
 		System.out.println(map);
 		
-		Game game = new Game(true,map);
+		Game game = new Game(map);
 		
 		game.setMap(map);
 		game.playTest();
@@ -80,7 +80,7 @@ public class TestStrategieGame extends AbstractStrategieGame {
 	@Override
 	public Coordonnee playTurn() {
 		ArrayList<InstanceTmpGame>  maps = new ArrayList<InstanceTmpGame> ();
-		int nbTurn = 2;
+		int nbTurn = 0;
 		if(game.getMap().nbTroue()<3){
 			nbTurn =0;
 		}
@@ -89,7 +89,7 @@ public class TestStrategieGame extends AbstractStrategieGame {
 		calculePlayer(game.getUs(),nbTurn,game.getMap(), maps, null);
 		
 		
-		int max = Integer.MIN_VALUE;
+		int max = -100000;
 		Coordonnee bestCoup = null;
 		
 		for(int i=0 ; i<maps.size() ; i++){

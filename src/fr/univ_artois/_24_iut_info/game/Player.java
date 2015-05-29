@@ -10,6 +10,8 @@ public abstract class Player {
 	
 	protected Game game;
 	
+	public boolean isEnnemy = false;
+	
 	
 	public Player(int nbTwist, Game game, int id){
 		this.id = id;
