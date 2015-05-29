@@ -2,23 +2,15 @@ package fr.univ_artois._24_iut_info.game;
 
 public abstract class Player {
 	
-	
-
-	private static int ID_COUNT = 1;
-	
 	protected int id;
 	
 	protected int nbTwist;
 	
 	protected Game game;
 	
-	private String couleur;
 	
-	
-	@SuppressWarnings("static-access")
-	public Player(int nbTwist, Game game){
-		this.id = this.ID_COUNT;
-		this.ID_COUNT ++ ;
+	public Player(int nbTwist, Game game, int id){
+		this.id = id;
 		
 		this.nbTwist = nbTwist;
 		
@@ -46,7 +38,7 @@ public abstract class Player {
 	
 
 	public String getCouleur(){
-		return this.couleur;
+		return (id == 1)?"Rouge":"Vert";
 	}
 	
 	public abstract void play();
