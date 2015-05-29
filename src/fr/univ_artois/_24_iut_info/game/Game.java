@@ -24,26 +24,14 @@ public class Game implements ReceiveListener {
 	
 	
 	
-	public Game(){
-		
-		
-		int addr = 0;
+	public Game(String addr, int port){
 		try {
-			con = new Connection(new InetSocketAddress(addr),this.nomEquipe ,this);
+			con = new Connection(new InetSocketAddress(addr,port),this.nomEquipe ,this);
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.exit(0);
 		}
 		
-	}
-	
-	
-	public Map getMap(){
-		return this.map;
-	}
-	
-	public Connection getConnection(){
-		return this.con;
 	}
 
 
@@ -84,9 +72,7 @@ public class Game implements ReceiveListener {
 
 	@Override
 	public void onGameStart(String mapStr) {
-		map.decode(mapStr);
-		this.gameLoop();
-		
+		map.decode(mapStr);		
 	}
 
 
@@ -94,7 +80,7 @@ public class Game implements ReceiveListener {
 
 	@Override
 	public void onOpponentPlay(int ligne, char colonne, int coin) {
-		// TODO Auto-generated method stub
+		//map.poser(x, y, id); //TODO
 		
 	}
 
@@ -108,16 +94,49 @@ public class Game implements ReceiveListener {
 		
 		System.out.println("c'est au joueur " + players[playerTurn].getCouleur() + " de jouer");
 		
+		players[playerTurn].play();
+		
 		
 	}
 
 
+	@Override
+	public void onIllegalPlay() {
+		System.err.println("le serveur indique que le coup n'étais pas bon");
+		
+	}
 
 
 	@Override
-	public void onErrorIllegalPlay() {
-		System.err.println("le serveur indique que le coup n'étais pas bon");
+	public void onOpponentPlayIllegal() {
+
+		System.err.println("le serveur indique que l'enemy a jouer un coup illegal");
 		
+	}
+
+
+	@Override
+	public void onPlayerCantPlay() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void onGameFinish(String serverMessage) {
+		System.out.println(serverMessage);
+		
+	}
+	
+
+	
+	
+	public Map getMap(){
+		return this.map;
+	}
+	
+	public Connection getConnection(){
+		return this.con;
 	}
 
 }

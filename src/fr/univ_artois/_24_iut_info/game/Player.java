@@ -6,7 +6,7 @@ public abstract class Player {
 
 	private static int ID_COUNT = 1;
 	
-	protected int id;
+	private int id;
 	
 	private int nbTwist;
 	
