@@ -33,8 +33,8 @@ public class Game implements ReceiveListener {
 	public Game(boolean test, Map map){
 		this.map = map;
 		
-		playerUs = new PlayerIA(nbTwist,this,1);
-		playerEnnemy = new PlayerIA(nbTwist,this,2);
+		playerUs = new PlayerIA(Main.NB_TWIST_START,this,1);
+		playerEnnemy = new PlayerIA(Main.NB_TWIST_START,this,2);
 	}
 
 
