@@ -30,7 +30,7 @@ public class Connection {
 		socket.connect(addr);
 		
 		receiverThread = new Thread(() -> {
-			DatagramPacket packet = new DatagramPacket(new byte[4096], 4096);
+			DatagramPacket packet = new DatagramPacket(new byte[4096], 4096, addr);
 			
 				try {
 					while(true) {

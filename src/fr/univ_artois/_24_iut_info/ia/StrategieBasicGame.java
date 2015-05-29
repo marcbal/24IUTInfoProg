@@ -1,19 +1,33 @@
 package fr.univ_artois._24_iut_info.ia;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
-import fr.univ_artois._24_iut_info.game.Game;
 import fr.univ_artois._24_iut_info.game.Map;
+
+import java.util.ArrayList;
+
+
+import fr.univ_artois._24_iut_info.game.Game;
 
 public class StrategieBasicGame extends AbstractStrategieGame {
 
-	public StrategieBasicGame(Game g) {
-		super(g);
-		// TODO Stub du constructeur généré automatiquement
+	public StrategieBasicGame(Game game) {
+		super(game);
 	}
 
 	
+	public TurnPossibility getMaxTwistValues() {
+		TurnPossibility turnMaxPointCaptured = nextTurnPossibilities.get(0).get(0);
+		for(List<TurnPossibility> row : nextTurnPossibilities) {
+			for(TurnPossibility col : row) {
+				if(turnMaxPointCaptured.getCapturedPoint() > col.getCapturedPoint())
+					turnMaxPointCaptured = col;
+			}
+		}
+		return turnMaxPointCaptured;
+	}
+
 	public void playTurn()
 	{
 		int ligne; 

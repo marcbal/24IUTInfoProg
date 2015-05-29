@@ -15,6 +15,9 @@ public class Map implements Cloneable{
 		String[] lignes=str.split("|");
 		
 		for(String ligne : lignes){
+			if(ligne.isEmpty()){
+				continue;
+			}
 			String[] cases = ligne.split(":");
 			List<Integer> list=new ArrayList<Integer>();
 			map.add(list);
@@ -115,6 +118,18 @@ public class Map implements Cloneable{
 		}
 		
 		return value==0?0:(value<0?1:2);
+	}
+	
+	public int getTotalPointOfPlayer(int id){
+		int totalPoint=0;
+		for(int i=0;i<map.size();i++){
+			for(int j=0;j<map.get(0).size();j++){
+				if(this.whoIsTheCase(i,j)==id){
+					totalPoint+=getPoint(i,j);
+				}
+			}
+		}
+		return totalPoint;
 	}
 	
 	public int getLigne(){

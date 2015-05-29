@@ -23,6 +23,8 @@ public class TurnPossibility {
 	public int getCapturedPoint(){
 		if(!this.mapAfter.canPose(x,y))
 			return 0;
+		
+		
 		return 0;
 	}
 	public int getEnemyCapturedPoint(){
