@@ -43,6 +43,28 @@ public abstract class Player {
 		return this.nbTwist;
 	}
 	
+
+	public String getCouleur(){
+		return this.couleur;
+	}
+	
 	public abstract void play();
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
