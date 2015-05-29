@@ -16,8 +16,16 @@ public class Game {
 	
 	private Player[] players;
 	
+	private boolean isEnd;
+	
+	int nbPlayers = 2;
 	
 	public Game(){
+		//gestion des variables
+		this.isEnd = false;
+		
+		
+		
 		int addr = 0;
 		try {
 			con = new Connection(new InetSocketAddress(addr));
@@ -33,15 +41,17 @@ public class Game {
 		
 		this.initPlayer();
 		
+		this.gameLoop();
+		
 	}
 	
 	
 	
 	
 	private void initPlayer(){
-		int nbPlayers = 2;
 		
-		players = new Player[nbPlayers];
+		
+		this.players = new Player[nbPlayers];
 		
 		
 		
@@ -61,14 +71,46 @@ public class Game {
 			
 			if(tmp == 1 )players[i] = new PlayerHuman();
 			else players[i] = new PLayerIA();
+		}	
+		
+	}
+	
+	
+	private void gameLoop(){
+		
+		
+		int playerTurn = 0;
+		
+		while(!isEnd){
+			
+			players[playerTurn].play();
+			
+			
+			//TODO calcule des points
+			
+			this.isGameEnd();
+			
+			
+			
 		}
-			
-			
+		
+		
+		this.onGameEnd();
 		
 		
 		
 	}
 	
+	
+	//TODO a coder
+	private void isGameEnd(){
+		
+	}
+	
+	
+	private void onGameEnd(){
+		
+	}
 	
 	
 	public Map getMap(){
