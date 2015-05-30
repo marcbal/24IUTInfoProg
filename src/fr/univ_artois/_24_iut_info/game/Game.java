@@ -18,7 +18,6 @@ public class Game implements ReceiveListener {
 	
 	private Player playerEnnemy;
 	private Player playerUs;
-	private boolean test = false;
 	
 	
 	public Game(){
@@ -33,7 +32,6 @@ public class Game implements ReceiveListener {
 	
 	public Game(Map map){
 		this.map = map;
-		test = true;
 		
 		playerUs = new PlayerIA(Main.NB_TWIST_START,this,1);
 		playerEnnemy = new PlayerIA(Main.NB_TWIST_START,this,2);

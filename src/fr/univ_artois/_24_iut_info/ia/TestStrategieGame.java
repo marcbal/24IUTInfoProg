@@ -2,7 +2,6 @@ package fr.univ_artois._24_iut_info.ia;
 
 import java.util.ArrayList;
 
-import fr.univ_artois._24_iut_info.game.EnemyPlayer;
 import fr.univ_artois._24_iut_info.game.Game;
 import fr.univ_artois._24_iut_info.game.Map;
 import fr.univ_artois._24_iut_info.game.Player;
