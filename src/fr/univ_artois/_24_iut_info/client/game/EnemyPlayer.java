@@ -1,4 +1,4 @@
-package fr.univ_artois._24_iut_info.game;
+package fr.univ_artois._24_iut_info.client.game;
 
 public class EnemyPlayer extends Player {
 

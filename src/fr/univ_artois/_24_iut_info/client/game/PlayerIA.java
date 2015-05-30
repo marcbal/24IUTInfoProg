@@ -1,7 +1,7 @@
-package fr.univ_artois._24_iut_info.game;
+package fr.univ_artois._24_iut_info.client.game;
 
-import fr.univ_artois._24_iut_info.ia.Coordonnee;
-import fr.univ_artois._24_iut_info.ia.TestStrategieGame;
+import fr.univ_artois._24_iut_info.client.ia.Coordonnee;
+import fr.univ_artois._24_iut_info.client.ia.TestStrategieGame;
 
 public class PlayerIA extends Player {
 

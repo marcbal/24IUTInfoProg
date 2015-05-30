@@ -1,4 +1,4 @@
-package fr.univ_artois._24_iut_info.ia;
+package fr.univ_artois._24_iut_info.client.ia;
 
 public class Coordonnee {
 	

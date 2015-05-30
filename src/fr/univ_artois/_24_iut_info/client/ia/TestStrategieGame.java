@@ -1,10 +1,10 @@
-package fr.univ_artois._24_iut_info.ia;
+package fr.univ_artois._24_iut_info.client.ia;
 
 import java.util.ArrayList;
 
-import fr.univ_artois._24_iut_info.game.Game;
-import fr.univ_artois._24_iut_info.game.Map;
-import fr.univ_artois._24_iut_info.game.Player;
+import fr.univ_artois._24_iut_info.client.game.Game;
+import fr.univ_artois._24_iut_info.client.game.Map;
+import fr.univ_artois._24_iut_info.client.game.Player;
 
 public class TestStrategieGame extends AbstractStrategieGame {
 

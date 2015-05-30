@@ -1,7 +1,7 @@
-package fr.univ_artois._24_iut_info;
-import fr.univ_artois._24_iut_info.game.Game;
+package fr.univ_artois._24_iut_info.client;
+import fr.univ_artois._24_iut_info.client.game.Game;
 
-public class Main {
+public class ClientMain {
 	
 	public static final String NOM_EQUIPE = "Les Mouny Python";
 	public static final String SERVER_HOST = "172.30.7.16";

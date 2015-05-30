@@ -1,4 +1,4 @@
-package fr.univ_artois._24_iut_info.network;
+package fr.univ_artois._24_iut_info.client.network;
 
 public interface ReceiveListener {
 	

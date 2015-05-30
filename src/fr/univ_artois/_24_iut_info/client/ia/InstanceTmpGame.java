@@ -1,6 +1,6 @@
-package fr.univ_artois._24_iut_info.ia;
+package fr.univ_artois._24_iut_info.client.ia;
 
-import fr.univ_artois._24_iut_info.game.Map;
+import fr.univ_artois._24_iut_info.client.game.Map;
 
 public class InstanceTmpGame {
 	

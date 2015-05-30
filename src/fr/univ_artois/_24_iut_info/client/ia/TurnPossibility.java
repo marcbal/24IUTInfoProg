@@ -1,9 +1,9 @@
-package fr.univ_artois._24_iut_info.ia;
+package fr.univ_artois._24_iut_info.client.ia;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.univ_artois._24_iut_info.game.Map;
+import fr.univ_artois._24_iut_info.client.game.Map;
 
 public class TurnPossibility {
 	private int x;

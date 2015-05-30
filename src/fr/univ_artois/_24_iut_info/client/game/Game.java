@@ -1,12 +1,12 @@
-package fr.univ_artois._24_iut_info.game;
+package fr.univ_artois._24_iut_info.client.game;
 
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 
-import fr.univ_artois._24_iut_info.Main;
-import fr.univ_artois._24_iut_info.network.Connection;
-import fr.univ_artois._24_iut_info.network.ReceiveListener;
+import fr.univ_artois._24_iut_info.client.ClientMain;
+import fr.univ_artois._24_iut_info.client.network.Connection;
+import fr.univ_artois._24_iut_info.client.network.ReceiveListener;
 
 public class Game implements ReceiveListener {	
 	
@@ -22,7 +22,7 @@ public class Game implements ReceiveListener {
 	
 	public Game(){
 		try {
-			con = new Connection(new InetSocketAddress(InetAddress.getByName(Main.SERVER_HOST), Main.SERVER_PORT), Main.NOM_EQUIPE, this);
+			con = new Connection(new InetSocketAddress(InetAddress.getByName(ClientMain.SERVER_HOST), ClientMain.SERVER_PORT), ClientMain.NOM_EQUIPE, this);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -33,8 +33,8 @@ public class Game implements ReceiveListener {
 	public Game(Map map){
 		this.map = map;
 		
-		playerUs = new PlayerIA(Main.NB_TWIST_START,this,1);
-		playerEnnemy = new PlayerIA(Main.NB_TWIST_START,this,2);
+		playerUs = new PlayerIA(ClientMain.NB_TWIST_START,this,1);
+		playerEnnemy = new PlayerIA(ClientMain.NB_TWIST_START,this,2);
 		playerEnnemy.isEnnemy = true;
 	}
 
@@ -44,11 +44,11 @@ public class Game implements ReceiveListener {
 	@Override
 	public void onPlayerSet(int playerId) {
 		System.out.println("je suis id : " + playerId);
-		playerUs = (Main.HUMAIN) ?
-				new PlayerHuman(Main.NB_TWIST_START,this, playerId) :
-				new PlayerIA(Main.NB_TWIST_START,this, playerId);
+		playerUs = (ClientMain.HUMAIN) ?
+				new PlayerHuman(ClientMain.NB_TWIST_START,this, playerId) :
+				new PlayerIA(ClientMain.NB_TWIST_START,this, playerId);
 		
-		playerEnnemy = new EnemyPlayer(Main.NB_TWIST_START, this, (playerId == 1)?2:1);
+		playerEnnemy = new EnemyPlayer(ClientMain.NB_TWIST_START, this, (playerId == 1)?2:1);
 		
 		
 		
