@@ -29,28 +29,14 @@ public abstract class Player {
 		if(!game.getMap().canPose(ligne, colonne))
 			return false;
 		
+		this.nbTwist--;
 		
 		game.getMap().poser(ligne, colonne, this.id);
 		
-		int width = game.getMap().getColonne();
-		int height = game.getMap().getLigne();
-		
-		boolean haut = (ligne < height);
-		boolean gauche = (colonne < width);
-		
-		int coin = (haut && gauche) ? 1 :
-			(haut && !gauche) ? 2 :
-				(!haut && !gauche) ? 3 : 4;
-		
-		if (!haut)
-			ligne--;
-		if (!gauche)
-			colonne--;
 			
 		try {
 			if (!(this instanceof EnemyPlayer))
-				game.getConnection().sendTwistLock(ligne+1, (char) ('A'+colonne), coin);
-			this.nbTwist--;
+				game.getConnection().sendTwistLock(ligne, colonne);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

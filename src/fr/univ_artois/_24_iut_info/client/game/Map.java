@@ -37,31 +37,6 @@ public class Map implements Cloneable{
 	}
 	/**
 	 * 
-	 * @param ligne ligne du tableau principal
-	 * @param colonne colonne du tableau principal
-	 * @param coin coin de la case
-	 * @param id id du joueur 
-	 */
-	public void poser(int ligne,char colonne,int coin, int id){
-		colonne=Character.toUpperCase(colonne);
-		
-		int col=colonne-'A';
-		
-		if(coin==1){
-			poser(ligne-1,col,id);
-		}else if(coin==2){
-			poser(ligne-1,col+1,id);
-		}else if(coin==3){
-			poser(ligne,col+1,id);
-		}
-		else{
-			poser(ligne,col,id);
-		}
-		
-	
-	}
-	/**
-	 * 
 	 * @param ligne ligne du tableau pion
 	 * @param colonne colonne du tableau pion
 	 * @param id id du joueur

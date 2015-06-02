@@ -3,12 +3,8 @@ package fr.univ_artois._24_iut_info.server.network;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
-import java.net.InetSocketAddress;
 import java.net.SocketAddress;
-import java.net.SocketTimeoutException;
 import java.nio.charset.Charset;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 
 /**
@@ -42,7 +38,6 @@ import java.util.regex.Pattern;
 public class ServerConnection {
 	
 	private DatagramSocket socket;
-	private InetSocketAddress addr;
 	private Thread receiverThread;
 	private Charset charset = Charset.forName("UTF-8");
 	private ReceiveListener listener;
@@ -58,7 +53,7 @@ public class ServerConnection {
 		listener = l;
 		
 		receiverThread = new Thread(() -> {
-			DatagramPacket packet = new DatagramPacket(new byte[4096], 4096, addr);
+			DatagramPacket packet = new DatagramPacket(new byte[4096], 4096);
 			
 				try {
 					while(true) {

@@ -68,8 +68,8 @@ public class Game implements ReceiveListener {
 
 
 	@Override
-	public void onOpponentPlay(int ligne, char colonne, int coin) {
-		map.poser(ligne, colonne, coin, playerEnnemy.getId());
+	public void onOpponentPlay(int ligne, int colonne) {
+		map.poser(ligne, colonne, playerEnnemy.getId());
 	}
 
 
@@ -81,6 +81,11 @@ public class Game implements ReceiveListener {
 
 		System.out.println(map);
 		playerUs.play();
+	}
+	
+	@Override
+	public void onGoodPlay() {
+		System.err.println("le coup a été accepté");
 	}
 
 
@@ -103,8 +108,9 @@ public class Game implements ReceiveListener {
 
 
 	@Override
-	public void onGameFinish(String serverMessage) {
-		System.out.println(serverMessage);
+	public void onGameFinish(int scoreP1, int scoreP2) {
+		System.err.println("Score joueur 1 : "+scoreP1);
+		System.err.println("Score joueur 2 : "+scoreP2);
 		System.err.println(map);
 	}
 	
@@ -144,5 +150,7 @@ public class Game implements ReceiveListener {
 		
 		
 	}
+
+
 
 }

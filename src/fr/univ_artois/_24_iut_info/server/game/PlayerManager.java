@@ -3,14 +3,8 @@ package fr.univ_artois._24_iut_info.server.game;
 import java.io.IOException;
 import java.net.SocketAddress;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import com.sun.corba.se.spi.legacy.connection.GetEndPointInfoAgainException;
 
 import fr.univ_artois._24_iut_info.server.network.ReceiveListener;
 
@@ -49,7 +43,7 @@ public class PlayerManager implements ReceiveListener {
 	}
 	
 	
-
+	
 	public List<Player> getPlayers() {
 		return Collections.unmodifiableList(players);
 	}
@@ -60,10 +54,22 @@ public class PlayerManager implements ReceiveListener {
 		return players.get(currentPlayer);
 	}
 	
+	public int getPlayerId(Player p) {
+		return players.indexOf(p)+1;
+	}
+	
 	public Player nextPlayer() {
 		currentPlayer++;
 		currentPlayer %= players.size();
 		return getCurrentPlayer();
+	}
+	
+	
+	public boolean hasEveryoneFinished() {
+		for (Player p : players)
+			if (!p.hasFinishPlay())
+				return false;
+		return true;
 	}
 
 
@@ -81,12 +87,13 @@ public class PlayerManager implements ReceiveListener {
 			int position = players.size()+1;
 			game.getConnection().sendPlayerNumber(playerAddr, position);
 			players.add(new Player(name, playerAddr));
+			
+			if (players.size() == 2)
+				game.startGame();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
-		if (players.size() == 2)
-			game.startGame();
 	}
 
 
@@ -115,18 +122,33 @@ public class PlayerManager implements ReceiveListener {
 			} catch (IOException e) { }	// on en fait rien car de toute façon, le joueur qui a tenté de se co n'a pas d'importance
 		}
 		
+		if (getPlayer(playerAddr).hasFinishPlay()) {
+			try {
+				game.getConnection().sendProtocolError(playerAddr, "Vous ne pouvez plus jouer");
+			} catch (IOException e) { }	// on en fait rien car de toute façon, le joueur qui a tenté de se co n'a pas d'importance
+		}
 		
-		boolean ok = game.onPlayerPlay(getPlayer(playerAddr), ligne, colonne);
+		Player p = getPlayer(playerAddr);
+		
+		boolean ok = game.onPlayerPlay(p, getPlayerId(p), ligne, colonne);
 		
 		try {
 			if (ok) {
 				game.getConnection().sendGoodPlay(playerAddr);
-				game.getConnection().sendEnnemyGoodPlay(getOtherPlayer(getPlayer(playerAddr)).address, ligne, colonne);
+				game.getConnection().sendEnnemyGoodPlay(getOtherPlayer(p).address, ligne, colonne);
 			}
 			else {
 				game.getConnection().sendBadPlay(playerAddr);
-				game.getConnection().sendEnnemyBadPlay(getOtherPlayer(getPlayer(playerAddr)).address);
+				game.getConnection().sendEnnemyBadPlay(getOtherPlayer(p).address);
 			}
+			if (p.hasFinishPlay())
+				game.getConnection().sendNoMorePawn(playerAddr);
+			
+			if (hasEveryoneFinished() || !game.getMap().containEmptyPion())
+				for (Player pl : players)
+					game.getConnection().sendFinish(pl.address, game.getPlayersScore());
+			else
+				game.getConnection().sendPlay(getOtherPlayer(p).address);
 		} catch(IOException e) {
 			e.printStackTrace();
 		}

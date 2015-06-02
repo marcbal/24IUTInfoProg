@@ -20,15 +20,19 @@ public interface ReceiveListener {
 	 * <b>Important : </b> Il se peut que l'adversaire ait envoyé un coup invalide. Dans ce cas, la méthode
 	 * <code>onOpponentPlayIllegal()</code> est appelée
 	 * @param ligne la ligne du twist-lock posé par l'adversaire
-	 * @param colonne la colonne du twist-lock posé par l'adversaire
 	 * @param coin le coin du twist-lock posé par l'adversaire
 	 */
-	public void onOpponentPlay(int ligne, char colonne, int coin);
+	public void onOpponentPlay(int ligne, int colonne);
 
 	/**
 	 * Méthode appelée lorsque le serveur nous attend pour jouer
 	 */
 	public void onRoundStart();
+	
+	/**
+	 * Méthode appelée lorsque le serveur indique que le joueur a bien joué.
+	 */
+	public void onGoodPlay();
 	
 	/**
 	 * Méthode appelée lorsque le serveur indique que le coup qu'on a joué est illégal
@@ -47,8 +51,11 @@ public interface ReceiveListener {
 	
 	/**
 	 * Méthode appelée lorsque le serveur indique que la partie est terminée
-	 * @param serverMessage le message du serveur, contenant le score de la partie
+	 * @param scoreP1 le score du joueur 1
+	 * @param scoreP2 le score du joueur 2
 	 */
-	public void onGameFinish(String serverMessage);
+	public void onGameFinish(int scoreP1, int scoreP2);
+
+	
 	
 }

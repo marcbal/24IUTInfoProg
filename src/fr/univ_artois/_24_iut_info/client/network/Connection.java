@@ -3,16 +3,14 @@ package fr.univ_artois._24_iut_info.client.network;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
-import java.net.InetSocketAddress;
+import java.net.SocketAddress;
 import java.net.SocketTimeoutException;
 import java.nio.charset.Charset;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Connection {
 	
 	private DatagramSocket socket;
-	private InetSocketAddress addr;
+	private SocketAddress addr;
 	private Thread receiverThread;
 	private Charset charset = Charset.forName("UTF-8");
 	private ReceiveListener listener;
@@ -20,7 +18,7 @@ public class Connection {
 	
 	
 	
-	public Connection(InetSocketAddress a, String nomEquipe, ReceiveListener l) throws IOException {
+	public Connection(SocketAddress a, String nomEquipe, ReceiveListener l) throws IOException {
 		if (a == null || nomEquipe == null || l == null)
 			throw new IllegalArgumentException("les arguments ne peuvent pas être null");
 		socket = new DatagramSocket();
@@ -42,7 +40,7 @@ public class Connection {
 
 						System.out.println("[Serveur] "+dataStr);
 						
-						String[] data = dataStr.split("[:-]", 2);
+						String[] data = dataStr.split(":", 2);
 						
 						
 						if (data.length != 2) {
@@ -52,7 +50,7 @@ public class Connection {
 						
 						
 						try {
-							interpreteReceivedMessage(data[0], data[1]);
+							interpreteReceivedMessage(Integer.parseInt(data[0]), data[1]);
 						} catch (Exception e) {
 							System.err.println("erreur lors de la prise en charge du message du serveur");
 							e.printStackTrace();
@@ -69,85 +67,79 @@ public class Connection {
 		receiverThread.start();
 		
 		
-		send(nomEquipe);
-		
+		send(210, nomEquipe);
 		
 	}
 	
-	
-	private void send(String s) throws IOException {
-		System.out.println("[Client] "+s);
-		byte[] bytes = s.getBytes(charset);
+
+	private void send(int code, String data) throws IOException {
+		String out = code+":"+data;
+		System.out.println("[Client] "+out);
+		byte[] bytes = out.getBytes(charset);
 		socket.send(new DatagramPacket(bytes, bytes.length, addr));
 	}
 	
 	
-	private void interpreteReceivedMessage(String code, String data) {
+	private void interpreteReceivedMessage(int code, String data) {
 		
-		if (code.equals("1") || code.equals("2"))
-			listener.onPlayerSet(Integer.parseInt(code));
+		if (code == 120)
+			System.err.println("Erreur de protocole : "+data);
+		
+		else if (code == 130) {
+			System.err.println("Impossible de rejoindre le serveur");
+			System.exit(0);
+		}
+		
+		else if (code == 110)
+			listener.onPlayerSet(Integer.parseInt(data));
 		
 		
 		
-		else if (code.equals("01")) {
-			String[] d = data.split("\n");
-			if (d.length != 2)
-				throw new InvalidServerMessage("Partie data invalide");
-			
-			if (!d[1].toLowerCase().startsWith("map="))
-				throw new InvalidServerMessage("Partie data invalide : la deuxième ligne doit commencer par 'map='");
-			
-			String map = d[1].substring(4);
-			
-			listener.onGameStart(map);
+		else if (code == 111) {
+			listener.onGameStart(data);
 		}
 		
 
-		else if (code.equals("10")) {
+		else if (code == 112) {
 			listener.onRoundStart();
 		}
 		
+		else if (code == 113) {
+			listener.onGoodPlay();
+		}
 		
-		else if (code.equals("20")) {
+		else if (code == 123) {
+			listener.onIllegalPlay();
+		}
+		
+		
+		else if (code == 114) {
 			String[] d = data.split(":");
 
 			if (d.length != 2)
 				throw new InvalidServerMessage("Partie data invalide");
 			
-			Matcher m = Pattern.compile("^([0-9]+)([A-Za-z]+)([0-9]+)$").matcher(d[1]);
-			int ligne = -1, coin = -1;
-			char colonne = ' ';
-			if (m.find()) {
-			    ligne = Integer.parseInt(m.group(1));
-			    colonne = m.group(2).charAt(0);
-			    coin = Integer.parseInt(m.group(3));
-			}
-			else
-				throw new InvalidServerMessage("Le code du coup adversaire est invalide : doit être ChiffreLettreChiffre (1A1 par exemple)");
 			
-			listener.onOpponentPlay(ligne, colonne, coin);
+			listener.onOpponentPlay(Integer.parseInt(d[0]), Integer.parseInt(d[1]));
 		}
 
 
-		else if (code.equals("21")) {
-			listener.onIllegalPlay();
-		}
 
-		else if (code.equals("22")) {
+		else if (code == 124) {
 			listener.onOpponentPlayIllegal();
 		}
 
-		else if (code.equals("50")) {
+		else if (code == 115) {
 			listener.onPlayerCantPlay();
 		}
 
-		else if (code.equals("88")) {
-			listener.onGameFinish(data);
-			System.exit(0);
-		}
+		else if (code == 116) {
+			String[] d = data.split(":");
 
-		else if (code.equals("91")) {
-			System.err.println("Demande non valide : veuillez relancer le serveur");
+			if (d.length != 2)
+				throw new InvalidServerMessage("Partie data invalide");
+			
+			listener.onGameFinish(Integer.parseInt(d[0]), Integer.parseInt(d[1]));
 			System.exit(0);
 		}
 		
@@ -162,8 +154,8 @@ public class Connection {
 	
 	
 	
-	public synchronized void sendTwistLock(int ligne, char colonne, int coin) throws IOException {
-		send(""+ligne+colonne+coin);
+	public synchronized void sendTwistLock(int ligne, int colonne) throws IOException {
+		send(212, ligne+":"+colonne);
 	}
 	
 	
