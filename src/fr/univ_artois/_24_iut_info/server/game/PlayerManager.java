@@ -153,6 +153,8 @@ public class PlayerManager implements ReceiveListener {
 			e.printStackTrace();
 		}
 		
+		nextPlayer();
+		
 		
 	}
 	

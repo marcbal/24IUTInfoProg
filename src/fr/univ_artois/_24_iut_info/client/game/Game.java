@@ -85,33 +85,33 @@ public class Game implements ReceiveListener {
 	
 	@Override
 	public void onGoodPlay() {
-		System.err.println("le coup a été accepté");
+		System.out.println("le coup a été accepté");
 	}
 
 
 	@Override
 	public void onIllegalPlay() {
-		System.err.println("le serveur indique que notre coup n'étais pas bon");
+		System.out.println("le serveur indique que notre coup n'étais pas bon");
 	}
 
 
 	@Override
 	public void onOpponentPlayIllegal() {
-		System.err.println("le serveur indique que l'ennemi a jouer un coup illegal");
+		System.out.println("le serveur indique que l'ennemi a jouer un coup illegal");
 	}
 
 
 	@Override
 	public void onPlayerCantPlay() {
-		System.err.println("vous ne pouvez plus jouer");
+		System.out.println("vous ne pouvez plus jouer");
 	}
 
 
 	@Override
 	public void onGameFinish(int scoreP1, int scoreP2) {
-		System.err.println("Score joueur 1 : "+scoreP1);
-		System.err.println("Score joueur 2 : "+scoreP2);
-		System.err.println(map);
+		System.out.println("Score joueur 1 : "+scoreP1);
+		System.out.println("Score joueur 2 : "+scoreP2);
+		System.out.println(map);
 	}
 	
 	
